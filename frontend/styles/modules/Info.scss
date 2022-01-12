@@ -1,0 +1,40 @@
+.info-main {
+    position: relative;
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+
+.info-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 7rem;
+    background-color: var(--secondary-color);
+    /* z-index: -5; */
+}
+
+.info-main-heading {
+    position: absolute;
+    margin-top: 3.9rem;
+    width: 15rem;
+    transform: translateY(-50%);
+}
+
+.info-block {
+    /* width: 9rem; */
+}
+
+.info-title {
+    margin-top: 2rem;
+}
+
+.info-content {
+    padding-top: 1rem;
+}
+
+.info-block-top {
+    margin-top: 7rem;
+    /* width: 6rem; */
+}

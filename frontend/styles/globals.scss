@@ -1,16 +1,64 @@
-html,
-body {
-  padding: 0;
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
+  padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+font-family: "FranklinGothicBookRegular";
+src: local("FranklinGothicBookRegular"),
+ url("/fonts/FranklinGothicBookRegular.ttf") format("truetype");
+}
+
+@font-face {
+font-family: "FranklinGothicHeavyRegular";
+src: local("FranklinGothicHeavyRegular"),
+ url("/fonts/FranklinGothicHeavyRegular.ttf") format("truetype");
+}
+
+:root {
+  --background-color : rgb(232,230,213);
+  --secondary-color :rgb(206,202,174);
+  --dark-color : rgb(81,80,74);
+  --light-color : rgb(121,120,114);
+  --text-light-color : rgb(253,246,214);
+  --icon-size : 1.2rem;
+  --navbar-height : 5rem;
+}
+
+.global-icons {
+  color: var(--dark-color);
+  margin: 0.4rem;
+  font-size: var(--icon-size);
+  cursor: pointer;
+}
+
+.badge {
+  margin: 0px calc(var(--icon-size) / 3) ;
+  font-size: var(--icon-size);
+}
+
+@import "./modules/Carousel.scss";
+@import "./modules/collecMini.scss";
+@import "./modules/collection_panel.scss";
+@import "./modules/footer.scss";
+@import "./modules/Home.scss";
+@import "./modules/Info.scss";
+@import "./modules/nav.scss";
+@import "./modules/profile.scss";
+@import "./modules/signup.scss";

@@ -1,0 +1,24 @@
+{
+  "name": "dawgzonline",
+  "version": "1.0.0",
+  "description": "An ecommerce application",
+  "main": "index.js",
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:frontend": "npm run export -w frontend",
+    "build": "npm run build:frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhjha/dawgnonline.git"
+  },
+  "author": "Nikhil Kumar Jha, Sumeet Laxman Suryawanshi",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nikhjha/dawgnonline/issues"
+  },
+  "homepage": "https://github.com/nikhjha/dawgnonline#readme"
+}

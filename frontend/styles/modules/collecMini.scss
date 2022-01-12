@@ -1,0 +1,35 @@
+.collec-mini {
+    width: 100%;
+    height: 15rem;
+    padding: 2rem 0rem;
+}
+
+.collec-mini-container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.collec-mini-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collec-mini-header {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.collec-mini-btn {
+    width: 80%;
+    border: none;
+    padding: 0.25rem ;
+    background-color: var(--dark-color);
+    cursor: pointer;
+}
