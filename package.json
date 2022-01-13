@@ -1,24 +1,31 @@
 {
   "name": "dawgzonline",
-  "version": "1.0.0",
-  "description": "An ecommerce application",
-  "main": "index.js",
-  "workspaces": [
-    "frontend"
-  ],
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:frontend": "npm run export -w frontend",
-    "build": "npm run build:frontend"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build && next export",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nikhjha/dawgnonline.git"
+  "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.1",
+    "@mui/material": "^5.2.3",
+    "next": "12.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.47.0",
+    "sharp": "^0.29.3"
   },
-  "author": "Nikhil Kumar Jha, Sumeet Laxman Suryawanshi",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/nikhjha/dawgnonline/issues"
-  },
-  "homepage": "https://github.com/nikhjha/dawgnonline#readme"
+  "devDependencies": {
+    "eslint": "8.6.0",
+    "eslint-config-next": "12.0.7",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^9.0.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-optimized-images": "^2.6.2"
+  }
 }

@@ -7,7 +7,8 @@ export default function terms_and_conditions() {
     return (
         <div>
           <Head>
-            <title>Dawgzonline - contact us</title>
+            <title>Dawgzonline - Terms and Conditions</title>
+            <link rel="icon" href="/mini-logo.webp"/>
             </Head>  
             <Navbar />
             <TermsAndConditionsPage />
