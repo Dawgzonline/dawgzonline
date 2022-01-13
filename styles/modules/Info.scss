@@ -1,7 +1,14 @@
 .info-main {
     position: relative;
-    padding: 1rem 2rem 0rem 2rem;
-    margin-bottom: 2rem;
+    padding: 1rem 2rem 6.5rem 2rem;
+
+    & .info-logo {
+        position: absolute;
+        bottom: 0rem;
+        right: 1rem;
+        width: 100px;
+        height: 100px;
+    }
 }
 
 .info-background {

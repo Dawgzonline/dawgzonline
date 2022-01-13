@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "@mui/material";
+import Image from "next/image";
 
 const InfoParas = ({ content }) => {
   return (
@@ -50,6 +51,9 @@ function Info({ heading, contents }) {
           </div>
         );
       })}
+      <div className="info-logo">
+      <Image alt="dawgzonline logo" width="100" height="100" src="/logo.png" />
+      </div>
     </div>
   );
 }
