@@ -1,24 +1,24 @@
 
-.collection-panel-content-group{
+.collectionpanelcontentgroup{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.5rem 0rem;
 }
 
-.collection-panel-content {
+.collectionpanelcontent {
     padding: 0rem 0.5rem;
     display: flex;
     flex-direction: column;
 }
 
-.collection-panel-link {
+.collectionpanellink {
     margin: 0rem 0rem;
     text-align: start;
     border: none;
     background-color: var(--secondary-color);
 }
 
-.collection-panel-link:hover {
+.collectionpanellink:hover {
     color: var(--dark-color);
 }

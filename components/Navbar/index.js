@@ -12,6 +12,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { styled } from "@mui/material/styles";
 import { Typography } from "@mui/material";
+import styles from '../../styles/Nav.module.scss';
 
 const CustomizedBadge = styled(Badge)`
   & .MuiBadge-badge {
@@ -40,32 +41,32 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar">
-      <MenuIcon className="global-icons" onClick={() => openNav(true)} />
-      <PersonOutlineOutlinedIcon className="global-icons" />
-      <HomeOutlinedIcon className="global-icons" />
-      <div className="nav-logo">
+    <div className={styles.navbar}>
+      <MenuIcon className={styles.globalicons} onClick={() => openNav(true)} />
+      <PersonOutlineOutlinedIcon className={styles.globalicons} />
+      <HomeOutlinedIcon className={styles.globalicons} />
+      <div className={styles.navlogo}>
       <Image alt="" src="/logo.png" width="50" height="50"/>
       </div>
-      <SearchIcon className="global-icons" />
+      <SearchIcon className={styles.globalicons} />
       <CustomizedBadge
         badgeContent={wishListCount}
-        className="badge"
+        className={styles.badge}
         overlap="circular"
         invisible={false}
       >
-        <FavoriteBorderOutlinedIcon className="global-icons" />
+        <FavoriteBorderOutlinedIcon className={styles.globalicons} />
       </CustomizedBadge>
       <CustomizedBadge
         badgeContent={cartItemCount}
-        className="badge"
+        className={styles.badge}
         overlap="circular"
         invisible={false}
       >
-        <ShoppingCartOutlinedIcon className="global-icons" />
+        <ShoppingCartOutlinedIcon className={styles.globalicons} />
       </CustomizedBadge>
       <div
-        className="nav-container"
+        className={styles.navcontainer}
         ref={navRef}
         style={{
           transform: !navOpenState ? "translateX(-100%)" : "translateX(0%)",
@@ -77,7 +78,7 @@ export default function Navbar() {
         }}
       >
         <div
-          className="nav-drawer"
+          className={styles.navdrawer}
           style={{
             transform: !navOpenState ? "translateX(-100%)" : "translateX(0%)",
           }}
@@ -90,11 +91,11 @@ export default function Navbar() {
             />
           ))}
 
-            <div className="nav-footer">
-              <button className="nav-link" onClick={() => { history.push('/contact'); closeNav();}}><Typography variant="body1" color="myprimary.dark">Contact Us</Typography></button>
-              <button className="nav-link" onClick={() => {history.push('/about'); closeNav();}} ><Typography variant="body1" color="myprimary.dark">About Us</Typography></button>
-              <button className="nav-link"><Typography variant="body1" color="myprimary.dark">FAQS</Typography></button>
-              <button className="nav-link"><Typography variant="body1" color="myprimary.dark">INSTAGRAM</Typography></button>
+            <div className={styles.navfooter}>
+              <button className={styles.navlink} onClick={() => { history.push('/contact'); closeNav();}}><Typography variant="body1" color="myprimary.dark">Contact Us</Typography></button>
+              <button className={styles.navlink} onClick={() => {history.push('/about'); closeNav();}} ><Typography variant="body1" color="myprimary.dark">About Us</Typography></button>
+              <button className={styles.navlink}><Typography variant="body1" color="myprimary.dark">FAQS</Typography></button>
+              <button className={styles.navlink}><Typography variant="body1" color="myprimary.dark">INSTAGRAM</Typography></button>
             </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Typography } from "@mui/material";
+import styles from "../../styles/Collection_panel.module.scss";
 
 export default function CollectionPanel({ content, rightOriented }) {
   const [subCollectionOpenState, setSubCollectionOpenState] = useState({
@@ -22,13 +23,13 @@ export default function CollectionPanel({ content, rightOriented }) {
   };
 
   return (
-    <div className="collection-panel-content-group">
+    <div className={styles.collectionpanelcontentgroup}>
       {!rightOriented && (
-        <div className="collection-panel-content">
+        <div className={styles.collectionpanelcontent}>
           {content.map((collecLink, index) => (
             <button
               key={`collection-link-${index}`}
-              className="collection-panel-link"
+              className={styles.collectionpanellink}
               onClick={() => {
                 openSubCollection(collecLink.links, collecLink.id);
               }}
@@ -47,7 +48,7 @@ export default function CollectionPanel({ content, rightOriented }) {
       )}
       {subCollectionOpenState.state ? (
         <div
-          className="collection-panel-content"
+          className={styles.collectionpanelcontent}
           style={
             !rightOriented
               ? { borderLeft: "0.1rem solid var(--dark-color)" }
@@ -57,7 +58,7 @@ export default function CollectionPanel({ content, rightOriented }) {
           {subCollection.map((collecLink, index) => (
             <button
               key={`collection-panel-sub-link-${index}`}
-              className="collection-panel-link"
+              className={styles.collectionpanellink}
             >
               <Typography variant="body1" color="myprimary.main">
                 {collecLink.title}
@@ -69,11 +70,11 @@ export default function CollectionPanel({ content, rightOriented }) {
         <div></div>
       )}
       {rightOriented && (
-        <div className="collection-panel-content">
+        <div className={styles.collectionpanelcontent}>
           {content.map((collecLink, index) => (
             <button
               key={`collection-link-${index}`}
-              className="collection-panel-link"
+              className={styles.collectionpanellink}
               onClick={() => {
                 openSubCollection(collecLink.links, collecLink.id);
               }}

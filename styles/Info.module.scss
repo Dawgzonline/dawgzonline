@@ -1,4 +1,4 @@
-.info-main {
+.infomain {
     position: relative;
     padding: 1rem 2rem 6.5rem 2rem;
 
@@ -11,7 +11,7 @@
     }
 }
 
-.info-background {
+.infobackground {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,14 +22,14 @@
     /* z-index: -5; */
 }
 
-.info-main-heading {
+.infomainheading {
     position: absolute;
     top: 5rem;
     width: 15rem;
     transform: translateY(-50%);
 }
 
-.info-block-top {
+.infoblocktop {
     margin-top: 7rem;
     /* width: 6rem; */
 }

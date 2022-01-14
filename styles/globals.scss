@@ -41,24 +41,4 @@ src: local("FranklinGothicHeavyRegular"),
   --navbar-height : 5rem;
 }
 
-.global-icons {
-  color: var(--dark-color);
-  margin: 0.4rem;
-  font-size: var(--icon-size);
-  cursor: pointer;
-}
 
-.badge {
-  margin: 0px calc(var(--icon-size) / 3) ;
-  font-size: var(--icon-size);
-}
-
-@import "./modules/Carousel.scss";
-@import "./modules/collecMini.scss";
-@import "./modules/collection_panel.scss";
-@import "./modules/footer.scss";
-@import "./modules/Home.scss";
-@import "./modules/Info.scss";
-@import "./modules/nav.scss";
-@import "./modules/profile.scss";
-@import "./modules/signup.scss";

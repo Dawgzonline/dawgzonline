@@ -10,7 +10,7 @@
     top : 0;
     overflow: hidden;
 
-    & .nav-logo {
+    & .navlogo {
     margin: 0rem auto;
     align-self: center;
     height: 50px;
@@ -19,7 +19,7 @@
     }
 }
 
-.nav-container {
+.navcontainer {
     position: fixed;
     top: 0;
     left: 0;
@@ -29,7 +29,7 @@
     transform: translateX(-100%);
 }
 
-.nav-drawer {
+.navdrawer {
     width: 60%;
     height: calc(100% - var(--navbar-height));
     margin-top: var(--navbar-height);
@@ -39,13 +39,13 @@
     padding: 1rem;
 }
 
-.nav-collection-header {
+.navcollectionheader {
     width: 100%;
     padding: 0.2rem 0.6rem;
     background-color: var(--dark-color);
 }
 
-.nav-link {
+.navlink {
     margin: 0rem 0rem;
     color: var(--light-color);
     text-align: start;
@@ -54,17 +54,29 @@
     font-weight: 600;
 }
 
-.nav-link:hover {
+.navlink:hover {
     color: var(--dark-color);
 }
 
-.nav-footer {
+.navfooter {
     display: flex;
     flex-direction: column;
     margin: 0.5rem 0rem;
 }
 
-.nav-footer > .nav-link {
+.navfooter > .nav-link {
     font-weight: 800;
     color: var(--dark-color);
 }
+
+.globalicons {
+    color: var(--dark-color);
+    margin: 0.4rem;
+    font-size: var(--icon-size);
+    cursor: pointer;
+  }
+  
+  .badge {
+    margin: 0px calc(var(--icon-size) / 3) ;
+    font-size: var(--icon-size);
+  }

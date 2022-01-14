@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import Image from "next/image";
+import styles from '../../styles/Info.module.scss';
 
 const InfoParas = ({ content }) => {
   return (
@@ -22,13 +23,13 @@ const InfoParas = ({ content }) => {
 
 function Info({ heading, contents }) {
   return (
-    <div className="info-main">
-      <div className="info-background"></div>
+    <div className={styles.infomain}>
+      <div className={styles.infobackground}></div>
 
       <Typography
         variant="h4"
         color="myprimary.dark"
-        className="info-main-heading"
+        className={styles.infomainheading}
       >
         {heading}
       </Typography>
@@ -37,7 +38,7 @@ function Info({ heading, contents }) {
         return (
           <div
             key={`info-${index}`}
-            className={index === 0 ? "info-block info-block-top" : "info-block"}
+            className={index === 0 ? `${styles.infoblock} ${styles.infoblocktop}` : `${styles.infoblock}`}
             style={content.width}
           >
             <Typography
@@ -51,7 +52,7 @@ function Info({ heading, contents }) {
           </div>
         );
       })}
-      <div className="info-logo">
+      <div className={styles.infologo}>
       <Image alt="dawgzonline logo" width="100" height="100" src="/logo.png" />
       </div>
     </div>

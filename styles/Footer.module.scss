@@ -3,12 +3,12 @@
     height: 5rem;
 }
 
-.footer-grid {
+.footergrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.footer-grid-item {
+.footergriditem {
     width: 100%;
     height: 100%;
     padding: 0.5rem;
@@ -16,7 +16,7 @@
     flex-direction: column;
 }
 
-.footer-grid-item > button {
+.footergriditem > button {
     border: none;
     cursor: pointer;
     background-color: var(--background-color);
