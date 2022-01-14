@@ -26,5 +26,5 @@ export default function AboutUsPage() {
     }
   ];
 
-  return <Info heading="ABOUT US" contents={contents}/>;
+  return <Info heading=" US" contents={contents}/>;
 }
