@@ -54,8 +54,8 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className={styles.signup-container}>
-      <div className={styles.signup-inner-container}>
+    <div className={styles.signup_container}>
+      <div className={styles.signup_inner_container}>
         <Typography variant="h4" color="myprimary.dark" variantMapping={{h4 : "h1"}}>SIGN UP</Typography>
         <form noValidate onSubmit={handleSubmit}>
           <Typography variant="body1" color="myprimary.dark">First Name</Typography>
@@ -68,7 +68,7 @@ export default function SignUpPage() {
             placeholder="Enter the text here"
           />
           {validationError.error === error.firstName && (
-            <Typography variant="body2" color="myprimary.main" className={styles.signup-validation-error}>
+            <Typography variant="body2" color="myprimary.main" className={styles.signup_validation_error}>
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}
@@ -82,7 +82,7 @@ export default function SignUpPage() {
             placeholder="Enter the text here"
           />
           {validationError.error === error.lastName && (
-            <Typography variant="body2" color="myprimary.main" className={styles.signup-validation-error}>
+            <Typography variant="body2" color="myprimary.main" className={styles.signup_validation_error}>
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}
@@ -96,7 +96,7 @@ export default function SignUpPage() {
             placeholder="Enter the text here"
           />
           {validationError.error === error.email && (
-            <Typography variant="body2" color="myprimary.main" className={styles.signup-validation-error}>
+            <Typography variant="body2" color="myprimary.main" className={styles.signup_validation_error}>
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}
@@ -110,11 +110,11 @@ export default function SignUpPage() {
               type={!passwordVisibility ? "password" : "text"}
               placeholder="Enter the text here"
             />
-            {!passwordVisibility && <VisibilityIcon className={styles.signup-visibility} onClick={()=>{setPasswordVisibility(true)}}/> }
-            {passwordVisibility && <VisibilityOffIcon className={styles.signup-visibility} onClick={()=>{setPasswordVisibility(false)}}/>} 
+            {!passwordVisibility && <VisibilityIcon className={styles.signup_visibility} onClick={()=>{setPasswordVisibility(true)}}/> }
+            {passwordVisibility && <VisibilityOffIcon className={styles.signup_visibility} onClick={()=>{setPasswordVisibility(false)}}/>} 
           </div>
           {validationError.error === error.password && (
-            <Typography variant="body2" color="myprimary.main" className={styles.signup-validation-error}>
+            <Typography variant="body2" color="myprimary.main" className={styles.signup_validation_error}>
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}
@@ -128,11 +128,11 @@ export default function SignUpPage() {
               type={!confirmPasswordVisibility ? "password" : "text"}
               placeholder="Enter the text here"
             />
-            {!confirmPasswordVisibility && <VisibilityIcon className={styles.signup-visibility} onClick={()=>{setConfirmPasswordVisibility(true)}}/> }
-            {confirmPasswordVisibility && <VisibilityOffIcon className={styles.signup-visibility} onClick={()=>{setConfirmPasswordVisibility(false)}}/>} 
+            {!confirmPasswordVisibility && <VisibilityIcon className={styles.signup_visibility} onClick={()=>{setConfirmPasswordVisibility(true)}}/> }
+            {confirmPasswordVisibility && <VisibilityOffIcon className={styles.signup_visibility} onClick={()=>{setConfirmPasswordVisibility(false)}}/>} 
           </div>
           {validationError.error === error.confirmPassword && (
-            <Typography variant="body2" color="myprimary.main" className={styles.signup-validation-error}>
+            <Typography variant="body2" color="myprimary.main" className={styles.signup_validation_error}>
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}

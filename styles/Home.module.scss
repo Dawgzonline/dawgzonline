@@ -1,10 +1,10 @@
-.top-carousel-poster-1 {
+.top_carousel_poster_1 {
     height: 100%;
     width : 100%;
     position: relative;
 }
 
-.top-carousel-poster1-background {
+.top_carousel_poster1_background {
     position: absolute;
     width: 25%;
     height: 100%;
@@ -14,7 +14,7 @@
 }
 
 
-.top-carousel-poster1-main {
+.top_carousel_poster1_main {
     width: 100%;
     height: 100%;
     display: grid;
@@ -22,26 +22,26 @@
 }
 
 
-.top-carousel-poster1-first-half {
+.top_carousel_poster1_first_half {
     z-index: 10;
 }
 
-.top-carousel-poster1-first-half-inner {
+.top_carousel_poster1_first_half_inner {
     padding: 1rem;
     text-align: center;
 }
 
-.top-carousel-poster1-heading-outer {
+.top_carousel_poster1_heading_outer {
     width: 12rem;
     margin: 0 auto;
 }
 
-.top-carousel-poster1-heading {
+.top_carousel_poster1_heading {
     padding:0 12%;
 }
 
 
-.top-carousel-poster1-button {
+.top_carousel_poster1_button {
     margin-top: 2rem;
     width: 12rem;
     background-color: var(--dark-color);
@@ -50,14 +50,14 @@
     border: none;
 }
 
-.top-carousel-poster1-para {
+.top_carousel_poster1_para {
     position: relative;
     width: 100%;
     text-align: center;
 }
 
 
-.top-carousel-poster1-para2 {
+.top_carousel_poster1_para2 {
     position: absolute;
     top: 0.2rem;
     left:0.2rem;
@@ -65,20 +65,20 @@
     width: 100%;
 }
 
-.top-carousel-poster1-second-half {
+.top_carousel_poster1_second_half {
     z-index: 10;
 }
 
 /* ---------------------------------------- */
 
 
-.bottom-carousel-poster-1 {
+.bottom_carousel_poster_1 {
     height: 100%;
     width : 100%;
     position: relative;
 }
 
-.bottom-carousel-poster1-background {
+.bottom_carousel_poster1_background {
     background-color: var(--secondary-color);
     position: absolute;
     width: 100%;
@@ -88,7 +88,7 @@
     z-index: -1;
 }
 
-.bottom-carousel-poster1-main {
+.bottom_carousel_poster1_main {
     height: 100%;
     width: 100%;
     display: grid;
@@ -96,18 +96,18 @@
 }
 
 
-.bottom-carousel-poster1-second-half-inner {
+.bottom_carousel_poster1_second_half_inner {
     padding: 3rem 1rem 2rem 1rem;
     text-align: center;
 }
 
 
-.bottom-carousel-poster1-heading {
+.bottom_carousel_poster1_heading {
     font-weight: bold;
     width: 100%;
 }
 
-.bottom-carousel-poster1-para {
+.bottom_carousel_poster1_para {
     position: relative;
     width: 100%;
     text-align: center;
@@ -115,7 +115,7 @@
     padding-top: 0;
 }
 
-.bottom-carousel-poster1-para2 {
+.bottom_carousel_poster1_para2 {
     position: absolute;
     top: 0.2rem;
     left:0.2rem;
@@ -123,7 +123,7 @@
     width: 100%;
 }
 
-.bottom-carousel-poster1-button {
+.bottom_carousel_poster1_button {
     font-weight: bold;
     width: 10rem;
     background-color: var(--dark-color);

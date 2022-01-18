@@ -28,7 +28,7 @@ export default function CollectionPanel({ content, rightOriented }) {
         <div className={styles.collectionpanelcontent}>
           {content.map((collecLink, index) => (
             <button
-              key={`collection-link-${index}`}
+              key={`collection_link_${index}`}
               className={styles.collectionpanellink}
               onClick={() => {
                 openSubCollection(collecLink.links, collecLink.id);
@@ -57,7 +57,7 @@ export default function CollectionPanel({ content, rightOriented }) {
         >
           {subCollection.map((collecLink, index) => (
             <button
-              key={`collection-panel-sub-link-${index}`}
+              key={`collection_panel_sub_link_${index}`}
               className={styles.collectionpanellink}
             >
               <Typography variant="body1" color="myprimary.main">
@@ -73,7 +73,7 @@ export default function CollectionPanel({ content, rightOriented }) {
         <div className={styles.collectionpanelcontent}>
           {content.map((collecLink, index) => (
             <button
-              key={`collection-link-${index}`}
+              key={`collection_link_${index}`}
               className={styles.collectionpanellink}
               onClick={() => {
                 openSubCollection(collecLink.links, collecLink.id);

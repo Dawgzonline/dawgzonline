@@ -1,6 +1,6 @@
 import React, { useRef, useState, Children } from "react";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons_material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons_material/ArrowForwardIos";
 import styles from "../../styles/Carousel.module.scss";
 
 function Carousel({ children, height }) {
@@ -11,7 +11,7 @@ function Carousel({ children, height }) {
 
   const rightSlide = () => {
     const traversal = 100 / childrenCount;
-    if (carouselTraverse.current-traversal > -100) {
+    if (carouselTraverse.current_traversal > -100) {
       carouselTraverse.current = carouselTraverse.current-traversal;
       setCurrImg((currentImg) => {
         return currentImg + 1;
@@ -31,16 +31,16 @@ function Carousel({ children, height }) {
 
   return (
     <div className={styles.carousel}>
-      <div className={styles.carousel-top} style={{ height: height }}>
-        <div className={styles.carousel-left}>
+      <div className={styles.carousel_top} style={{ height: height }}>
+        <div className={styles.carousel_left}>
           <ArrowBackIosIcon
-            className={styles.carousel-arrow}
+            className={styles.carousel_arrow}
             onClick={leftSlide}
           />
         </div>
 
         <div
-          className={styles.carousel-inner}
+          className={styles.carousel_inner}
           style={{
             width: `${childrenCount * 100}%`,
             transform: `translateX(${carouselTraverse.current}%)`,
@@ -48,26 +48,26 @@ function Carousel({ children, height }) {
         >
           {childrenArray.map((child, index) => (
             <div
-              key={`carousel-child-${index}`}
-              className={styles.carousel-item}
+              key={`carousel_child_${index}`}
+              className={styles.carousel_item}
             >
               {child}
             </div>
           ))}
         </div>
 
-        <div className={styles.carousel-right}>
+        <div className={styles.carousel_right}>
           <ArrowForwardIosIcon
-            className={styles.carousel-arrow}
+            className={styles.carousel_arrow}
             onClick={rightSlide}
           />
         </div>
       </div>
-      <div className={styles.carousel-bottom}>
+      <div className={styles.carousel_bottom}>
         {childrenArray.map((child, index) => (
           <div
-            key={`carousel-child-dot-${index}`}
-            className={styles.carousel-bottom-dots}
+            key={`carousel_child_dot_${index}`}
+            className={styles.carousel_bottom_dots}
             style={{
               backgroundColor: currImg === index ? "var(--dark-color)" : "",
             }}

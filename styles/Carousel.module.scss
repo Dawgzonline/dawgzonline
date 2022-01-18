@@ -1,9 +1,9 @@
-.carousel-top {
+.carousel_top {
 	position: relative;
     overflow: hidden;
 }
 
-.carousel-inner {
+.carousel_inner {
 	height: 100%;
     width: 100%;
     display: flex;
@@ -11,7 +11,7 @@
     transform : translateX(0%);
 }
 
-.carousel-left {
+.carousel_left {
 	height: 100%;
 	width: 3rem;
 	position: absolute;
@@ -22,11 +22,11 @@
 	z-index: 100;
 }
 
-.carousel-left:hover {
+.carousel_left:hover {
     background-color: rgb(0, 0, 0, 0.2);
 }
 
-.carousel-right	{
+.carousel_right	{
 	height: 100%;
 	width: 3rem;
 	position: absolute;
@@ -37,18 +37,18 @@
 	z-index: 100;
 }
 
-.carousel-right:hover {
+.carousel_right:hover {
     background-color: rgb(0, 0, 0, 0.2);
 }
 
-.carousel-bottom {
+.carousel_bottom {
 	height: 1rem;
 	width: 100%;
 	text-align: center;
 
 }
 
-.carousel-bottom-dots {
+.carousel_bottom_dots {
 	height: 0.4rem;
 	width: 0.4rem;
 	border-radius: 50%;
@@ -57,17 +57,17 @@
 	margin: 0.2rem;
 }
 
-.carousel-arrow {
+.carousel_arrow {
     color: white;
     transform: scale(1.2);
 }
 
-.carousel-item {
+.carousel_item {
     width: 100%;
     height: 100%;
 }
 
-.carousel-image {
+.carousel_image {
     height: 100%;
 }
 

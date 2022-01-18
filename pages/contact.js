@@ -7,7 +7,7 @@ export default function contact() {
     return (
         <div>
           <Head>
-            <title>Dawgzonline - contact us</title>
+            <title>Dawgzonline - Contact Us</title>
             </Head>  
             <Navbar />
             <ContactUsPage />

@@ -32,11 +32,11 @@ const ProfileInput = ({ title, content , onUpdate, updates, update, updateState,
 
   return (
     <div
-      className={!open ? `${styles.profile-input}` : `${styles.profile-input} ${styles.profile-input-dim}`}
+      className={!open ? `${styles.profile_input}` : `${styles.profile_input} ${styles.profile_input_dim}`}
     >
       {!open && (
         <div style={{alignSelf : "center"}}>
-          <Typography variant="body1" color="myprimary.dark" className={styles.profile-input-title}>{title}</Typography>
+          <Typography variant="body1" color="myprimary.dark" className={styles.profile_input_title}>{title}</Typography>
           {content && <Typography variant="body2" color="myprimary.main">{content}</Typography>}
         </div>
       )}
@@ -49,7 +49,7 @@ const ProfileInput = ({ title, content , onUpdate, updates, update, updateState,
           }}
         />
       )}
-      <EditIcon className={styles.global-icons} onClick={inputClick} />
+      <EditIcon className={styles.global_icons} onClick={inputClick} />
     </div>
   );
 };
@@ -107,8 +107,8 @@ export default function ProfilePage() {
     },
 ];
   return (
-    <div className={styles.profile-container}>
-      <div className={styles.profile-inner-container}>
+    <div className={styles.profile_container}>
+      <div className={styles.profile_inner_container}>
         <Typography variant="h4" color="myprimary.dark" variantMapping={{h4 : "h1"}}>PROFILE</Typography>
         {profileItem.map((item, index) => (
           <ProfileInput
