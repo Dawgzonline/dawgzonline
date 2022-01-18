@@ -1,6 +1,6 @@
 import React, { useRef, useState, Children } from "react";
-import ArrowBackIosIcon from "@mui/icons_material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons_material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "../../styles/Carousel.module.scss";
 
 function Carousel({ children, height }) {
@@ -11,8 +11,8 @@ function Carousel({ children, height }) {
 
   const rightSlide = () => {
     const traversal = 100 / childrenCount;
-    if (carouselTraverse.current_traversal > -100) {
-      carouselTraverse.current = carouselTraverse.current-traversal;
+    if (carouselTraverse.current-traversal > -100) {
+      carouselTraverse.current = carouselTraverse.current - traversal;
       setCurrImg((currentImg) => {
         return currentImg + 1;
       });
