@@ -1,4 +1,5 @@
 import React from 'react';
+import { brown } from '@mui/material/colors';
 import { createTheme, ThemeProvider as Provider} from '@mui/material/styles';
 
 const theme = createTheme({
@@ -10,7 +11,8 @@ const theme = createTheme({
         mytext : {
             main : 'rgb(253,246,214)',
             background : "orange",
-        }
+        },
+        error : brown  
     },
     typography : {
         h1 : {
