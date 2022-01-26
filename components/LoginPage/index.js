@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Box, Alert, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -6,6 +6,7 @@ import useForm from "../../hooks/useForm";
 import styles from "../../styles/Login.module.scss";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { error, formContentType } from "../../constant/constant";
+import Button from "../styled/Button";
 
 export default function LoginPage() {
   const [validationError, setValidationError] = useState({
@@ -47,9 +48,13 @@ export default function LoginPage() {
       </div>
       <Box component="form" onSubmit={handleSubmission} noValidate>
         <div className={styles.login_details}>
-        <Box>
-          {infoError !== "" && <Alert severity="error" sx={{color : "myprimary.dark"}}>{infoError}</Alert>}
-        </Box>
+          <Box>
+            {infoError !== "" && (
+              <Alert severity="error" sx={{ color: "myprimary.dark" }}>
+                {infoError}
+              </Alert>
+            )}
+          </Box>
           <div className={styles.login_info}>
             <input name="username" type="text" placeholder="Username" />
             <EditIcon className={styles.global_icons} />
@@ -77,10 +82,23 @@ export default function LoginPage() {
             </Typography>
           )}
 
-          <button type="submit">LOGIN</button>
+          <Button text="LOGIN" variant="body1" color="myprimary.dark"></Button>
           <ul>
-            <li>Forgot Password?</li>
-            <li>New User ?Sign up</li>
+            <Typography
+              variant="body2"
+              variantMapping={{ body2: "li" }}
+              color="myprimary.main"
+            >
+              Forgot Password?
+            </Typography>
+
+            <Typography
+              variant="body2"
+              variantMapping={{ body2: "li" }}
+              color="myprimary.main"
+            >
+              New User ?Sign up
+            </Typography>
           </ul>
         </div>
       </Box>

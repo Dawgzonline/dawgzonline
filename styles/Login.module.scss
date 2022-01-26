@@ -28,7 +28,7 @@
   border-bottom: 0.1rem solid var(--light-color);
   background-color: var(--secondary-color);
   width: 100%;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   outline: none;
 }
 
@@ -62,12 +62,9 @@
 }
 
 .login_details > ul > li {
-  font-size: 0.7rem;
-  font-weight: 600;
   list-style: none;
   border: none;
   border-bottom: 0.1rem solid var(--light-color);
-  color: var(--light-color);
 }
 
 .validation_error {
