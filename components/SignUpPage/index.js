@@ -7,6 +7,7 @@ import { Box, Alert, Typography } from "@mui/material";
 import useForm from "../../hooks/useForm";
 import styles from "../../styles/Signup.module.scss";
 import { error, formContentType } from "../../constant/constant";
+import Button from "../styled/Button";
 
 export default function SignUpPage() {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -75,8 +76,12 @@ export default function SignUpPage() {
         >
           SIGN UP
         </Typography>
-        <Box sx={{ my : 1}}>
-          {infoError !== "" && <Alert severity="error" sx={{color : "myprimary.dark"}}>{infoError}</Alert>}
+        <Box sx={{ my: 1 }}>
+          {infoError !== "" && (
+            <Alert severity="error" sx={{ color: "myprimary.dark" }}>
+              {infoError}
+            </Alert>
+          )}
         </Box>
         <form noValidate onSubmit={handleSubmission}>
           <Typography variant="body1" color="myprimary.dark">
@@ -116,11 +121,7 @@ export default function SignUpPage() {
           <Typography variant="body1" color="myprimary.dark">
             Email ID
           </Typography>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter the text here"
-          />
+          <input type="email" name="email" placeholder="Enter the text here" />
           {validationError.error === error.email && (
             <Typography
               variant="body2"
@@ -200,18 +201,29 @@ export default function SignUpPage() {
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}
-          <button type="submit">
+          {/* <button type="submit">
             <Typography variant="body1" color="myprimary.dark">
               CREATE ACCOUNT
             </Typography>
-          </button>
+          </button> */}
+          <Button
+            text="CREATE ACCOUNT"
+            variant="body1"
+            color="myprimary.dark"
+          />
         </form>
-        <button>
+        {/* <button>
           <GoogleIcon />{" "}
           <Typography variant="body1" color="myprimary.dark">
             SIGN UP WITH GOOGLE
           </Typography>
-        </button>
+        </button> */}
+        <Button
+          icon={<GoogleIcon />}
+          text=" SIGN UP WITH GOOGLE"
+          variant="body1"
+          color="myprimary.dark"
+        />
       </div>
     </div>
   );
