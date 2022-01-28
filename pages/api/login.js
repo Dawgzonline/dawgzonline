@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     default:
       res
         .status(405)
-        .json({ message: "Please send login request by post method" });
+        .json({ message: "Please send signup request by post method" });
       break;
   }
 }

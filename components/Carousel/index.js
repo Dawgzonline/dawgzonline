@@ -2,6 +2,7 @@ import React, { useRef, useState, Children } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "../../styles/Carousel.module.scss";
+import { Fab } from "@mui/material";
 
 function Carousel({ children, height }) {
   const [currImg, setCurrImg] = useState(0);
@@ -11,7 +12,7 @@ function Carousel({ children, height }) {
 
   const rightSlide = () => {
     const traversal = 100 / childrenCount;
-    if (carouselTraverse.current-traversal > -100) {
+    if (carouselTraverse.current - traversal > -100) {
       carouselTraverse.current = carouselTraverse.current - traversal;
       setCurrImg((currentImg) => {
         return currentImg + 1;
@@ -33,10 +34,12 @@ function Carousel({ children, height }) {
     <div className={styles.carousel}>
       <div className={styles.carousel_top} style={{ height: height }}>
         <div className={styles.carousel_left}>
-          <ArrowBackIosIcon
-            className={styles.carousel_arrow}
-            onClick={leftSlide}
-          />
+          <Fab size="small" color="primary">
+            <ArrowBackIosIcon
+              className={styles.carousel_arrow}
+              onClick={leftSlide}
+            />
+          </Fab>
         </div>
 
         <div
@@ -57,10 +60,12 @@ function Carousel({ children, height }) {
         </div>
 
         <div className={styles.carousel_right}>
-          <ArrowForwardIosIcon
-            className={styles.carousel_arrow}
-            onClick={rightSlide}
-          />
+          <Fab size="small" color="primary">
+            <ArrowForwardIosIcon
+              className={styles.carousel_arrow}
+              onClick={rightSlide}
+            />
+          </Fab>
         </div>
       </div>
       <div className={styles.carousel_bottom}>

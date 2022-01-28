@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import MainPage from "../components/MainPage";
 import Navbar from "../components/Navbar";
 
-export default function Home() {
+export default function Home({banner}) {
   return (
     <div>
       <Head>
@@ -12,8 +12,16 @@ export default function Home() {
         <link rel="icon" href="/mini-logo.webp" />
       </Head>
       <Navbar />
-      <MainPage />
+      <MainPage banner={banner}/>
       <Footer />
     </div>
   );
 }
+
+export const getServerSideProps = () => {
+  return {
+    props : {
+      banner : "",
+    }
+  }
+};

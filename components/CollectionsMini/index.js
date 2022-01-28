@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CollectionPanel from "../CollectionPanel";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import styles from "../../styles/CollecMini.module.scss";
 
 export default function CollectionsMini({ collection }) {
@@ -12,12 +12,14 @@ export default function CollectionsMini({ collection }) {
         <div className={styles.collec_mini_content}>
           {openCollectionNo !== 1 && (
             <div className={styles.collec_mini_header}>
-              <button
-                className={styles.collec_mini_btn}
-                style={{
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{
                   position: "absolute",
                   top: "0%",
                   left: "50%",
+                  maxWidth : "18ch",
                   transform: "translate(-50%,-50%)",
                 }}
                 onClick={() => {
@@ -27,7 +29,7 @@ export default function CollectionsMini({ collection }) {
                 <Typography variant="subtitle2" color="mytext.main">
                   SHOP FOR {collection[0].heading}
                 </Typography>
-              </button>
+              </Button>
             </div>
           )}
           {openCollectionNo === 1 && (
@@ -40,12 +42,14 @@ export default function CollectionsMini({ collection }) {
         <div className={styles.collec_mini_content}>
           {openCollectionNo !== 2 && (
             <div className={styles.collec_mini_header}>
-              <button
-                className={styles.collec_mini_btn}
-                style={{
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{
                   position: "absolute",
                   bottom: "0%",
                   left: "50%",
+                  maxWidth : "18ch",
                   transform: "translate(-50%,50%)",
                 }}
                 onClick={() => {
@@ -55,7 +59,7 @@ export default function CollectionsMini({ collection }) {
                 <Typography variant="subtitle2" color="mytext.main">
                   SHOP FOR {collection[1].heading}
                 </Typography>
-              </button>
+              </Button>
             </div>
           )}
           {openCollectionNo === 2 && (

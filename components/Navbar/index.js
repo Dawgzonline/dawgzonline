@@ -1,4 +1,4 @@
-import React, { useRef, useState , useContext} from "react";
+import React, { useRef, useState, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import NavCollection from "./NavCollection";
@@ -11,8 +11,8 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { styled } from "@mui/material/styles";
-import { Typography } from "@mui/material";
-import styles from '../../styles/Nav.module.scss';
+import { Button, Divider } from "@mui/material";
+import styles from "../../styles/Nav.module.scss";
 
 const CustomizedBadge = styled(Badge)`
   & .MuiBadge-badge {
@@ -27,7 +27,7 @@ export default function Navbar() {
   const history = useRouter();
   const [navOpenState, setNavOpenState] = useState(false);
   const navRef = useRef();
-  const { collection} = useContext(AppStateContext);
+  const { collection } = useContext(AppStateContext);
   const navCollection = collection;
 
   const openNav = () => {
@@ -42,29 +42,37 @@ export default function Navbar() {
 
   return (
     <div className={styles.navbar}>
-      <MenuIcon className={styles.globalicons} onClick={() => openNav(true)} />
-      <PersonOutlineOutlinedIcon className={styles.globalicons} />
-      <HomeOutlinedIcon className={styles.globalicons} />
-      <div className={styles.navlogo}>
-      <Image alt="" src="/logo.png" width="50" height="50"/>
+      <div className={styles.topbar}>
+        <MenuIcon
+          className={styles.globalicons}
+          onClick={() => openNav(true)}
+        />
+        <PersonOutlineOutlinedIcon className={styles.globalicons} onClick={()=>{history.push("/profile")}}/>
+        <HomeOutlinedIcon className={styles.globalicons} onClick={()=>{history.push("/")}} />
+        <div className={styles.navlogo}>
+          <div className={styles.logo_container} onClick={()=>{history.push("/")}}>
+            <Image alt="" src="/logo.png" width="60" height="60" />
+          </div>
+        </div>
+        <SearchIcon className={styles.globalicons} />
+        <CustomizedBadge
+          badgeContent={wishListCount}
+          className={styles.badge}
+          overlap="circular"
+          invisible={false}
+        >
+          <FavoriteBorderOutlinedIcon className={styles.globalicons} />
+        </CustomizedBadge>
+        <CustomizedBadge
+          badgeContent={cartItemCount}
+          className={styles.badge}
+          overlap="circular"
+          invisible={false}
+        >
+          <ShoppingCartOutlinedIcon className={styles.globalicons} />
+        </CustomizedBadge>
       </div>
-      <SearchIcon className={styles.globalicons} />
-      <CustomizedBadge
-        badgeContent={wishListCount}
-        className={styles.badge}
-        overlap="circular"
-        invisible={false}
-      >
-        <FavoriteBorderOutlinedIcon className={styles.globalicons} />
-      </CustomizedBadge>
-      <CustomizedBadge
-        badgeContent={cartItemCount}
-        className={styles.badge}
-        overlap="circular"
-        invisible={false}
-      >
-        <ShoppingCartOutlinedIcon className={styles.globalicons} />
-      </CustomizedBadge>
+      <Divider />
       <div
         className={styles.navcontainer}
         ref={navRef}
@@ -91,12 +99,52 @@ export default function Navbar() {
             />
           ))}
 
-            <div className={styles.navfooter}>
-              <button className={styles.navlink} onClick={() => { history.push('/contact'); closeNav();}}><Typography variant="body1" color="myprimary.dark">Contact Us</Typography></button>
-              <button className={styles.navlink} onClick={() => {history.push('/about'); closeNav();}} ><Typography variant="body1" color="myprimary.dark">About Us</Typography></button>
-              <button className={styles.navlink}><Typography variant="body1" color="myprimary.dark">FAQS</Typography></button>
-              <button className={styles.navlink}><Typography variant="body1" color="myprimary.dark">INSTAGRAM</Typography></button>
-            </div>
+          <div className={styles.navfooter}>
+            <Button
+              sx={{
+                typography: "subtitle1",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+              onClick={() => {
+                history.push("/contact");
+                closeNav();
+              }}
+            >
+              Contact Us
+            </Button>
+            <Button
+              sx={{
+                typography: "subtitle1",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+              onClick={() => {
+                history.push("/about");
+                closeNav();
+              }}
+            >
+              About Us
+            </Button>
+            <Button
+              sx={{
+                typography: "subtitle1",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              FAQS
+            </Button>
+            <Button
+              sx={{
+                typography: "subtitle1",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              INSTAGRAM
+            </Button>
+          </div>
         </div>
       </div>
     </div>
