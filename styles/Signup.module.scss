@@ -1,85 +1,71 @@
 .signup_container {
-    background-color: var(--secondary-color);
-    padding-top: 7.5rem;
+  background-color: var(--secondary-color);
+  padding-top: 5rem;
 }
 
 .signup_inner_container {
-    background-color: var(--background-color);
-    padding: 0rem 3rem 2rem 3rem;
+  background-color: var(--background-color);
+  padding: 0rem 3rem 2rem 3rem;
 }
 
-.signup_inner_container > h1{
-    transform: translateY(-50%);
+.signup_inner_container > h1 {
+  transform: translateY(-50%);
 }
 
 .signup_inner_container > form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .signup_inner_container > form > * {
-    margin: 0.25rem;
+  margin: 0.25rem;
 }
 
 .signup_inner_container > form > button {
-    margin: 3rem 0rem 1rem 0rem;
-    align-self: center;
-    height: 2.5rem;
-    width: 10rem;
-    border-radius: 1rem;
-    border: none;
-    background-color: var(--background-color);
-    cursor: pointer;
-    box-shadow: 0.1rem 0.1rem 0.15rem 0rem rgb(125,125,125);
+  margin: 3rem 0rem 1rem 0rem;
+  align-self: center;
 }
 
 .signup_inner_container > button {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 2.5rem;
-    width: 15rem;
-    border-radius: 1rem;
-    border: none;
-    background-color: var(--background-color);
-    cursor: pointer;
-    box-shadow: 0.1rem 0.1rem 0.15rem 0rem rgb(125,125,125);
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    color: var(--dark-color);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-
-.signup_inner_container > form  input {
-    border: none;
-    border-bottom: 0.1rem solid var(--light-color);
-    background-color: var(--background-color);
-    height: 1.5rem;
-    width: 100%;
+.signup_inner_container > form input {
+  border: none;
+  border-bottom: 0.1rem solid var(--light-color);
+  background-color: var(--background-color);
+  height: 1.5rem;
+  width: 100%;
 }
 
-:is(.signup_inner_container > form  input:hover, .signup_inner_container > form  input:focus){
-    outline: none;
+:is(.signup_inner_container > form input:hover, .signup_inner_container
+    > form
+    input:focus) {
+  outline: none;
 }
 
-.signup_inner_container > form  input::_webkit_input_placeholder{
-    font-size: 0.75rem;
-    color: var(--light-color);
+.signup_inner_container > form input::_webkit_input_placeholder {
+  font-size: 0.75rem;
+  color: var(--light-color);
 }
 
 .signup_inner_container > form > .signup_validation_error {
-    margin-top: 0rem;
+  margin-top: 0rem;
+  display: flex;
+  align-items: center;
 }
-.signup_inner_container > form > .signup_validation_error > svg{
-    font-size: 0.75rem;
+.signup_inner_container > form > .signup_validation_error > svg {
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
 }
 
 .signup_visibility {
-    position: absolute;
-    top: 0.25rem;
-    right: 0.25rem;
-    font-size: 1.25rem !important;
-    color: var(--light-color);
-    cursor: pointer;
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  font-size: 1.25rem !important;
+  color: var(--light-color);
+  cursor: pointer;
 }

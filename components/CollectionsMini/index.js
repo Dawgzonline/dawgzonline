@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CollectionPanel from "../CollectionPanel";
-import { Typography } from "@mui/material";
+import { Typography, Button, Box } from "@mui/material";
+import Image from "next/image";
 import styles from "../../styles/CollecMini.module.scss";
 
 export default function CollectionsMini({ collection }) {
@@ -12,13 +13,16 @@ export default function CollectionsMini({ collection }) {
         <div className={styles.collec_mini_content}>
           {openCollectionNo !== 1 && (
             <div className={styles.collec_mini_header}>
-              <button
-                className={styles.collec_mini_btn}
-                style={{
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{
                   position: "absolute",
                   top: "0%",
                   left: "50%",
+                  maxWidth: "18ch",
                   transform: "translate(-50%,-50%)",
+                  zIndex : "50",
                 }}
                 onClick={() => {
                   setOpenCollectionNo(1);
@@ -27,7 +31,25 @@ export default function CollectionsMini({ collection }) {
                 <Typography variant="subtitle2" color="mytext.main">
                   SHOP FOR {collection[0].heading}
                 </Typography>
-              </button>
+              </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Box sx={{mt : "auto"}}>
+                  <Image
+                    src={collection[0].image}
+                    alt={collection[0].heading}
+                    width={120}
+                    height={160}
+                  />
+                </Box>
+              </Box>
             </div>
           )}
           {openCollectionNo === 1 && (
@@ -40,13 +62,16 @@ export default function CollectionsMini({ collection }) {
         <div className={styles.collec_mini_content}>
           {openCollectionNo !== 2 && (
             <div className={styles.collec_mini_header}>
-              <button
-                className={styles.collec_mini_btn}
-                style={{
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{
                   position: "absolute",
                   bottom: "0%",
                   left: "50%",
+                  maxWidth: "18ch",
                   transform: "translate(-50%,50%)",
+                  zIndex : "50",
                 }}
                 onClick={() => {
                   setOpenCollectionNo(2);
@@ -55,7 +80,25 @@ export default function CollectionsMini({ collection }) {
                 <Typography variant="subtitle2" color="mytext.main">
                   SHOP FOR {collection[1].heading}
                 </Typography>
-              </button>
+              </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Box>
+                  <Image
+                    src={collection[1].image}
+                    alt={collection[1].heading}
+                    width={120}
+                    height={160}
+                  />
+                </Box>
+              </Box>
             </div>
           )}
           {openCollectionNo === 2 && (
