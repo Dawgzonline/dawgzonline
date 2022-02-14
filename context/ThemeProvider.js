@@ -10,6 +10,12 @@ const theme = createTheme({
       dark: "rgb(61,60,54)",
       contrastText: "rgb(253,246,214)",
     },
+    secondary: {
+      light: "rgb(232,230,213)",
+      main: "rgb(206,202,174)",
+      dark: "rgb(180,180,150)",
+      contrastText: "rgb(253,246,214)",
+    },
     myprimary: {
       main: "rgb(121,120,114)",
       dark: "rgb(81,80,74)",
@@ -23,7 +29,6 @@ const theme = createTheme({
   typography: {
     h1: {
       //Normal font
-      fontFamily: "FranklinGothicBookRegular",
       fontSize: "2rem",
       fontWeight: 800,
     },
@@ -33,27 +38,22 @@ const theme = createTheme({
       fontWeight: 800,
     },
     h4: {
-      fontFamily: "FranklinGothicHeavyRegular",
       fontSize: "1.5rem",
       fontWeight: 800,
     },
     subtitle1: {
-      fontFamily: "FranklinGothicHeavyRegular",
       fontSize: "1rem",
       fontWeight: 800,
     },
     subtitle2: {
-      fontFamily: "FranklinGothicBookRegular",
       fontSize: "1rem",
       fontWeight: 600,
     },
     body1: {
-      fontFamily: "FranklinGothicBookRegular",
       fontSize: "0.8rem",
       fontWeight: 600,
     },
     body2: {
-      fontFamily: "FranklinGothicBookRegular",
       fontWeight: 400,
       fontSize: "0.8rem",
     },

@@ -32,6 +32,7 @@ export default async function handler(req, res) {
               "_type" : "user",
               "firstName" : userData.firstName,
               "lastName" : userData.lastName,
+              "username" : userData.email,
               "email" : userData.email,
               "password": hashedPassword,
               "auth_type": "custom_auth",

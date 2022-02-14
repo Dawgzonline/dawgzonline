@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import { Box, Alert, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -7,8 +7,12 @@ import styles from "../../styles/Login.module.scss";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { error, formContentType } from "../../constant/constant";
 import Button from "../styled/Button";
+import { useRouter } from "next/router";
+import { AuthContext } from "../../context/AuthProvider";
 
 export default function LoginPage() {
+  const { addToken } = useContext(AuthContext);
+  const router = useRouter();
   const [validationError, setValidationError] = useState({
     error: error.none,
     message: "",
@@ -35,6 +39,8 @@ export default function LoginPage() {
     },
     afterSubmission: (res) => {
       console.log(res);
+      addToken(res.data.token);
+      router.push("/");
     },
     error: (msg) => {
       setError(msg);
@@ -82,7 +88,7 @@ export default function LoginPage() {
             </Typography>
           )}
 
-          <Button text="LOGIN" variant="body1" color="myprimary.dark"></Button>
+          <Button text="LOGIN" type="submit"></Button>
           <ul>
             <Typography
               variant="body2"

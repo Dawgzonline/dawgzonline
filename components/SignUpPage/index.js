@@ -206,11 +206,7 @@ export default function SignUpPage() {
               CREATE ACCOUNT
             </Typography>
           </button> */}
-          <Button
-            text="CREATE ACCOUNT"
-            variant="body1"
-            color="myprimary.dark"
-          />
+          <Button text="CREATE ACCOUNT" type="submit" />
         </form>
         {/* <button>
           <GoogleIcon />{" "}
@@ -218,12 +214,7 @@ export default function SignUpPage() {
             SIGN UP WITH GOOGLE
           </Typography>
         </button> */}
-        <Button
-          icon={<GoogleIcon />}
-          text=" SIGN UP WITH GOOGLE"
-          variant="body1"
-          color="myprimary.dark"
-        />
+        <Button icon={<GoogleIcon />} text=" SIGN UP WITH GOOGLE" />
       </div>
     </div>
   );

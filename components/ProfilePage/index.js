@@ -1,12 +1,16 @@
-import React, { useState , useRef, useEffect, useMemo} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import { Typography } from "@mui/material";
-import styles from '../../styles/Profile.module.scss';
+import Button from "../styled/Button";
+import styles from "../../styles/Profile.module.scss";
+import useForm from "../../hooks/useForm";
+import { formContentType } from "../../constant/constant";
+import { Box, Typography } from "@mui/material";
+import getLocalFetch from "../../libs/fetch";
+import { AuthContext } from "../../context/AuthProvider";
 
-const ProfileInput = ({ title, content , onUpdate, updates, update, updateState, setUpdatesRef}) => {
+const ProfileInput = ({ title, content, inputName, show = true }) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const updateDone = useRef(updateState.initial);
 
   const inputClick = () => {
     if (!open) {
@@ -18,31 +22,34 @@ const ProfileInput = ({ title, content , onUpdate, updates, update, updateState,
     }
   };
 
-  useEffect(() =>{
-      const request = async() => {
-          updateDone.current = updateState.partial;
-          await onUpdate();
-          setUpdatesRef(updates.current.count += 1);
-          updateDone.current = updateState.done;
-      }
-      if(update && updateDone.current !== updateState.partial){
-       request(); 
-      }
-  },[update,onUpdate,updates,updateState,setUpdatesRef])
-
   return (
     <div
-      className={!open ? `${styles.profile_input}` : `${styles.profile_input} ${styles.profile_input_dim}`}
+      className={
+        !open
+          ? `${styles.profile_input}`
+          : `${styles.profile_input} ${styles.profile_input_dim}`
+      }
     >
       {!open && (
-        <div style={{alignSelf : "center"}}>
-          <Typography variant="body1" color="myprimary.dark" className={styles.profile_input_title}>{title}</Typography>
-          {content && <Typography variant="body2" color="myprimary.main">{content}</Typography>}
+        <div style={{ alignSelf: "center" }}>
+          <Typography
+            variant="body1"
+            color="myprimary.dark"
+            className={styles.profile_input_title}
+          >
+            {title}
+          </Typography>
+          {(content && show) && (
+            <Typography variant="body2" color="myprimary.main">
+              {content}
+            </Typography>
+          )}
         </div>
       )}
       {open && (
         <input
           value={inputValue}
+          name={inputName}
           placeholder="Enter text here"
           onChange={(e) => {
             setInputValue(e.target.value);
@@ -55,76 +62,104 @@ const ProfileInput = ({ title, content , onUpdate, updates, update, updateState,
 };
 
 export default function ProfilePage() {
-    const updateState = useMemo(() => { return {
-        initial : "INITIAL",
-        done : "DONE",
-        partial : "WORK_IN_PROGRESS"
-    }},[]);
-    const [update, setUpdate] = useState(false);
-    const updatesRef = useRef({state : updateState.initial, count : 0});
-    const setUpdatesRef = (count) => {
-        updatesRef.current = { state : updateState.partial, count : count};
-        if(count === profileItem.length){
-            console.log("done update");
-            setUpdate(false);
-            updatesRef.current = { state : updateState.initial, count : 0};
-        }
-    }
-  const profileItem = [
+  const [profileItem, setProfileItem] = useState([
     {
       title: "First Name",
-      onUpdate : () => {},
+      inputName: "firstName",
     },
     {
       title: "Last Name",
-      onUpdate : () => {},
+      inputName: "lastName",
     },
     {
       title: "Username",
-      onUpdate : () => {},
+      inputName: "username",
     },
     {
       title: "Email ID",
-      onUpdate : () => {},
+      inputName: "email",
     },
     {
       title: "Password",
-      onUpdate : () => {},
+      inputName: "password",
+      show : false
     },
     {
       title: "Mobile Number",
-      onUpdate : () => {},
+      inputName: "mobile",
     },
     {
       title: "Delivery Address 1",
-      content:
-        "Lorem ajacjlnc ajcancalnkc anclkjnkacnklacs ajkfjcanacnlk ncjankascnk",
-      onUpdate : () => {},
+      inputName: "address_1",
     },
     {
       title: "Add Delivery Address 2",
-      onUpdate : () => {},
+      inputName: "address_2",
     },
-];
-  return (
-    <div className={styles.profile_container}>
-      <div className={styles.profile_inner_container}>
-        <Typography variant="h4" color="myprimary.dark" variantMapping={{h4 : "h1"}}>PROFILE</Typography>
-        {profileItem.map((item, index) => (
-          <ProfileInput
-            key={`profile_input_${index}`}
-            title={item.title}
-            content={item.content}
-            onUpdate={item.onUpdate}
-            update={update}
-            updates={updatesRef}
-            updateState={updateState}
-            setUpdatesRef={setUpdatesRef}
-          />
-        ))}
+  ]);
 
-        <button disabled={update} onClick={()=>{setUpdate(true);}}><Typography variant="body1" color="myprimary.dark">UPDATE PROFILE</Typography></button>
+  const localFetch = getLocalFetch();
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const data = await localFetch.get("/api/user");
+        const userData = data.data;
+        setProfileItem([
+          ...profileItem.map((item) => {
+            if (userData[item.inputName]) {
+              return { ...item, content: userData[item.inputName] };
+            }
+            return item;
+          }),
+        ]);
+      } catch (e) {
+        console.log(e.response);
+      }
+    };
+    if (user) {
+      fetch();
+    }
+  }, [user]);
+  const { handleSubmission } = useForm({
+    postTo: "/api/user/",
+    contentType: formContentType.urlencoded,
+    validate: (data) => {
+      console.log(data);
+      return { error: false };
+    },
+    afterSubmission: (res) => {
+      console.log(res);
+    },
+    error: (msg) => {
+      console.log(msg);
+    },
+  });
+  return (
+    <Box component="form" noValidate onSubmit={handleSubmission}>
+      <div className={styles.profile_container}>
+        <div className={styles.profile_inner_container}>
+          <Typography
+            variant="h4"
+            color="myprimary.dark"
+            variantMapping={{ h4: "h1" }}
+          >
+            PROFILE
+          </Typography>
+          {profileItem.map((item, index) => (
+            <ProfileInput
+              key={`profile_input_${index}`}
+              title={item.title}
+              content={item.content}
+              inputName={item.inputName}
+              show={item.show}
+            />
+          ))}
+
+          <Button text="UPDATE" type="submit" />
+        </div>
       </div>
-    </div>
+    </Box>
   );
 }

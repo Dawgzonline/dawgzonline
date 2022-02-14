@@ -16,6 +16,7 @@
     "@sanity/client": "^2.23.2",
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "next": "12.0.7",
     "react": "17.0.2",

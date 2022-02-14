@@ -1,23 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { profile } from "../constant/constant";
+import { setToken} from "../libs/fetch";
 
 export const AuthContext = React.createContext({ user: null });
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const fetchRef = useRef();
+  const [user, setUser] = useState(false);
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem(profile));
-    fetchRef.current = axios.create({
-      baseURL: "/",
-      headers:
-        localData && localData.token
-          ? {
-              Authorization: `Bearer ${localData.token}`,
-            }
-          : {},
-    });
+    if(localData?.token){
+      setToken(localData?.token);
+      setUser(true);
+    }
   }, []);
 
   const addUser = (data) => {
@@ -28,18 +22,12 @@ export default function AuthProvider({ children }) {
       profile,
       JSON.stringify({ token })
     );
-    fetchRef.current = axios.create({
-      baseURL: "/",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setUser({});
+    setToken(token);
+    setUser(true);
   };
 
   const value = {
     user,
-    fetch: fetchRef.current,
     addUser,
     addToken,
   };

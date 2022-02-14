@@ -1,35 +1,82 @@
-import React , { useContext } from 'react';
-import Carousel from './../Carousel';
-import { AppStateContext } from '../../context/AppstateProvider';
-import CollectionsMini from '../CollectionsMini';
+import React, { useContext, useMemo } from "react";
+import Carousel from "./../Carousel";
+import { AppStateContext } from "../../context/AppstateProvider";
+import CollectionsMini from "../CollectionsMini";
 import { Box } from "@mui/material";
-import Image from 'next/image';
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-function MainPage() {
-
-    const {collection} = useContext(AppStateContext);
-    const collectionForCM = [collection[1],collection[0]];
+function MainPage({ banner }) {
+  const router = useRouter();
+  const { collection } = useContext(AppStateContext);
+  const collectionForCM = [collection[1], collection[0]];
+  const getWidthAndHeight = (url) => {
+    const imageName = url.split("/");
+    const data = imageName[imageName.length - 1].split("-")[1].split(".")[0].split("x");
+    return data;
+  };
+  const top_banner = useMemo(() => {
+    const filteredData = banner.filter(
+      (post) => post.category === "top_banner"
+    );
+    return filteredData.map((data) => {
+      const [ width, height ] = getWidthAndHeight(data.imageUrl);
+      return { ...data, width, height };
+    });
+  }, []);
+  const bottom_banner = useMemo(() => {
+    const filteredData = banner.filter(
+      (post) => post.category === "bottom_banner"
+    );
+    return filteredData.map((data) => {
+      const [ width, height ] = getWidthAndHeight(data.imageUrl);
+      return { ...data, width, height };
+    });
+  }, []);
 
   return (
     <div>
-        {/* First Carousel */}
-      <Carousel height="15rem">
-        <Box sx={{ width : "100%", height : "100%", position : "relative", cursor : "pointer"}} onClick={()=>{console.log("clicked")}}>
-          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdK-pL5Nsd0zy_wd_XaZ5Z7B_xq2ccdufQg&usqp=CAU" alt="" layout="fill" />
-        </Box>
-        <Box sx={{ width : "100%", height : "100%", position : "relative", cursor : "pointer"}} onClick={()=>{console.log("clicked")}}>
-          <Image src="https://cdn.pixabay.com/photo/2021/09/12/07/58/banner-6617550__340.png" alt="" layout="fill" />
-        </Box>
+      {/* First Carousel */}
+      <Carousel >
+        {top_banner.map((banner, index) => (
+          <Box
+            key={`top_banner_${index}`}
+            sx={{
+              width: "100%",
+              height: "100%",
+              position: "relative",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              router.push(banner.to);
+            }}
+          >
+            <Image src={banner.imageUrl} alt={banner.name} layout="responsive" priority quality={100} width={banner.width} height={banner.height} />
+          </Box>
+        ))}
       </Carousel>
 
-        <CollectionsMini collection={collectionForCM}/>
+      <CollectionsMini collection={collectionForCM} />
 
       {/* Second Carousel */}
-      <Carousel height="15rem">
+      <Carousel >
+        {bottom_banner.map((banner, index) => (
+          <Box
+            key={`bottom_banner_${index}`}
+            sx={{
+              width: "100%",
+              height: "100%",
+              position: "relative",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              router.push(banner.to);
+            }}
+          >
+            <Image src={banner.imageUrl} alt={banner.name} layout="responsive" priority quality={100} width={banner.width} height={banner.height} />
+          </Box>
+        ))}
       </Carousel>
-
-
-
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import { useRef, useContext, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { useRef, useState } from "react";
 import { set } from "lodash";
 import { formContentType } from "../constant/constant";
+import getLocalFetch from "../libs/fetch";
 
 export default function useForm({
   postTo,
@@ -11,8 +11,8 @@ export default function useForm({
   afterSubmission,
   contentType
 }) {
+  const fetch = getLocalFetch();
   const formData = useRef(null);
-  const { fetch } = useContext(AuthContext);
   const currentData = useRef({});
   const currentObj = useRef({});
   const [loading, setLoading] = useState(false);
