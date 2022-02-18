@@ -14,21 +14,7 @@
   & .topbar {
     display: flex;
     position: relative;
-    & .navlogo {
-      margin: 0 auto;
-      height: 1.5rem;
-      width: 1.5rem;
-      & .logo_container {
-        height: 70px;
-        width: 70px;
-        padding: 10px;
-        border-radius: 50%;
-        position: relative;
-        background-color: var(--background-color);
-        right: 50%;
-        bottom: 50%;
-      }
-    }
+    align-items: center;
   }
 }
 
@@ -39,7 +25,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
-  transform: translateX(-100%);
+  z-index: 200;
 }
 
 .navdrawer {
@@ -47,8 +33,6 @@
   height: calc(100% - var(--navbar-height));
   margin-top: var(--navbar-height);
   background-color: var(--secondary-color);
-  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(-100%);
   padding: 1rem;
   overflow-y: scroll;
 }

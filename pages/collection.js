@@ -1,10 +1,17 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ProductsPage from "../components/ProductsPage";
 import sanityClient from "../sanity/client";
 
-export default function collection({products}) {
+export default function collection({ products }) {
+  const router = useRouter();
+  const [filteredProduct, setFilteredProduct] = useState(products);
+  useEffect(() => {
+    setFilteredProduct(products);
+  }, [router.query]);
   return (
     <div>
       <Head>
@@ -13,27 +20,26 @@ export default function collection({products}) {
         <link rel="icon" href="/mini-logo.webp" />
       </Head>
       <Navbar />
-      <ProductsPage products={products}/>
+      <ProductsPage products={filteredProduct} />
       <Footer />
     </div>
   );
 }
 
-export const getStaticProps = async() => {
-  
+export const getStaticProps = async () => {
   const products = await sanityClient.fetch(` *[ _type=="product" ]{
     _id,
     description,
-    discountedPrice,
-    meta,
+    "discountedPrice" : mainVariant->discountedPrice,
+    categories,
     name,
-    originalPrice,
+    "originalPrice" : mainVariant->originalPrice,
     "imageUrl" : image.asset->url
   } `);
 
   return {
-    props : {
-      products : [...products,...products,...products,...products,...products,...products,...products,...products,...products,],
-    }
-  }
+    props: {
+      products: [...products],
+    },
+  };
 };

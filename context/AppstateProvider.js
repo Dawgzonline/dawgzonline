@@ -9,17 +9,20 @@ const collection = [
         id: 1,
         title: "Food",
         nested: true,
+        to: "/collection?category='food'",
         links: [{ title: "Wet food" }, { title: "Dry food" }],
       },
       {
         id: 2,
         title: "Treats",
         nested: true,
+        to: "/collection?category='treats'",
         links: [{ title: "Veg treats" }, { title: "Non-veg treats" }],
       },
       {
         id: 3,
         title: "Grooming",
+        to: "/collection?category='grooming'",
         nested: true,
         links: [
           { title: "Shampoo" },
@@ -27,9 +30,24 @@ const collection = [
           { title: "Grooming tools" },
         ],
       },
-      { id: 4, title: "Toys", nested: false },
-      { id: 5, title: "Accessories", nested: false },
-      { id: 6, title: "Utilities", nested: false },
+      {
+        id: 4,
+        title: "Toys",
+        nested: false,
+        to: "/collection?category='toys'",
+      },
+      {
+        id: 5,
+        title: "Accessories",
+        nested: false,
+        to: "/collection?category='accessories'",
+      },
+      {
+        id: 6,
+        title: "Utilities",
+        to: "/collection?category='utilities'",
+        nested: false,
+      },
     ],
   },
   {
@@ -40,17 +58,20 @@ const collection = [
         id: 1,
         title: "Food",
         nested: true,
+        to: "/collection?category='food'",
         links: [{ title: "Wet food" }, { title: "Dry food" }],
       },
       {
         id: 2,
         title: "Treats",
         nested: true,
+        to: "/collection?category='treats'",
         links: [{ title: "Veg treats" }, { title: "Non-veg treats" }],
       },
       {
         id: 3,
         title: "Grooming",
+        to: "/collection?category='grooming/bas'",
         nested: true,
         links: [
           { title: "Shampoo" },
@@ -58,9 +79,24 @@ const collection = [
           { title: "Grooming tools" },
         ],
       },
-      { id: 4, title: "Toys", nested: false },
-      { id: 5, title: "Accessories", nested: false },
-      { id: 6, title: "Utilities", nested: false },
+      {
+        id: 4,
+        title: "Toys",
+        nested: false,
+        to: "/collection?category='toys'",
+      },
+      {
+        id: 5,
+        title: "Accessories",
+        nested: false,
+        to: "/collection?category='accessories'",
+      },
+      {
+        id: 6,
+        title: "Utilities",
+        to: "/collection?category='utilities'",
+        nested: false,
+      },
     ],
   },
 ];
@@ -221,7 +257,7 @@ export const AppStateContext = React.createContext({ collection, filter });
 export default function AppstateProvider({ children }) {
   const value = {
     collection,
-    filter
+    filter,
   };
 
   return (

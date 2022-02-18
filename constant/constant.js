@@ -18,4 +18,6 @@ export const error = {
 export const RestMethod = {
     get : "GET",
     post : "POST",
+    patch : "PATCH",
+    delete : "DELETE",
 }

@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,38 +7,26 @@
 body {
   margin: 0;
   background-color: var(--background-color);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-@font-face {
-font-family: "FranklinGothicBookRegular";
-src: local("FranklinGothicBookRegular"),
- url("/fonts/FranklinGothicBookRegular.ttf") format("truetype");
-}
-
-@font-face {
-font-family: "FranklinGothicHeavyRegular";
-src: local("FranklinGothicHeavyRegular"),
- url("/fonts/FranklinGothicHeavyRegular.ttf") format("truetype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;800&display=swap');
 
 :root {
-  --background-color : rgb(232,230,213);
-  --secondary-color :rgb(206,202,174);
-  --dark-color : rgb(81,80,74);
-  --light-color : rgb(121,120,114);
-  --text-light-color : rgb(253,246,214);
-  --icon-size : 1.2rem;
-  --navbar-height : 5rem;
+  --background-color: rgb(232, 230, 213);
+  --secondary-color: rgb(206, 202, 174);
+  --dark-color: rgb(81, 80, 74);
+  --light-color: rgb(121, 120, 114);
+  --text-light-color: rgb(253, 246, 214);
+  --icon-size: 1rem;
+  --navbar-height: 5.5rem;
 }
-
-

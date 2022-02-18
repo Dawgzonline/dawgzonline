@@ -22,7 +22,8 @@ export default function CollectionsMini({ collection }) {
                   left: "50%",
                   maxWidth: "18ch",
                   transform: "translate(-50%,-50%)",
-                  zIndex : "50",
+                  zIndex: "50",
+                  p: 1,
                 }}
                 onClick={() => {
                   setOpenCollectionNo(1);
@@ -41,7 +42,7 @@ export default function CollectionsMini({ collection }) {
                   height: "100%",
                 }}
               >
-                <Box sx={{mt : "auto"}}>
+                <Box sx={{ mt: "auto" }}>
                   <Image
                     src={collection[0].image}
                     alt={collection[0].heading}
@@ -71,7 +72,8 @@ export default function CollectionsMini({ collection }) {
                   left: "50%",
                   maxWidth: "18ch",
                   transform: "translate(-50%,50%)",
-                  zIndex : "50",
+                  zIndex: "50",
+                  p: 1,
                 }}
                 onClick={() => {
                   setOpenCollectionNo(2);
