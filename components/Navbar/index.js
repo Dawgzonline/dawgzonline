@@ -46,7 +46,7 @@ export default function Navbar() {
         setAnimationState(false);
       }
     });
-  }, []);
+  }, [x]);
 
   const closeNav = () => {
     x.set(-100);

@@ -12,7 +12,10 @@ function MainPage({ banner }) {
   const collectionForCM = [collection[1], collection[0]];
   const getWidthAndHeight = (url) => {
     const imageName = url.split("/");
-    const data = imageName[imageName.length - 1].split("-")[1].split(".")[0].split("x");
+    const data = imageName[imageName.length - 1]
+      .split("-")[1]
+      .split(".")[0]
+      .split("x");
     return data;
   };
   const top_banner = useMemo(() => {
@@ -20,24 +23,24 @@ function MainPage({ banner }) {
       (post) => post.category === "top_banner"
     );
     return filteredData.map((data) => {
-      const [ width, height ] = getWidthAndHeight(data.imageUrl);
+      const [width, height] = getWidthAndHeight(data.imageUrl);
       return { ...data, width, height };
     });
-  }, []);
+  }, [banner]);
   const bottom_banner = useMemo(() => {
     const filteredData = banner.filter(
       (post) => post.category === "bottom_banner"
     );
     return filteredData.map((data) => {
-      const [ width, height ] = getWidthAndHeight(data.imageUrl);
+      const [width, height] = getWidthAndHeight(data.imageUrl);
       return { ...data, width, height };
     });
-  }, []);
+  }, [banner]);
 
   return (
     <div>
       {/* First Carousel */}
-      <Carousel >
+      <Carousel>
         {top_banner.map((banner, index) => (
           <Box
             key={`top_banner_${index}`}
@@ -51,7 +54,15 @@ function MainPage({ banner }) {
               router.push(banner.to);
             }}
           >
-            <Image src={banner.imageUrl} alt={banner.name} layout="responsive" priority quality={100} width={banner.width} height={banner.height} />
+            <Image
+              src={banner.imageUrl}
+              alt={banner.name}
+              layout="responsive"
+              priority
+              quality={100}
+              width={banner.width}
+              height={banner.height}
+            />
           </Box>
         ))}
       </Carousel>
@@ -59,7 +70,7 @@ function MainPage({ banner }) {
       <CollectionsMini collection={collectionForCM} />
 
       {/* Second Carousel */}
-      <Carousel >
+      <Carousel>
         {bottom_banner.map((banner, index) => (
           <Box
             key={`bottom_banner_${index}`}
@@ -73,7 +84,15 @@ function MainPage({ banner }) {
               router.push(banner.to);
             }}
           >
-            <Image src={banner.imageUrl} alt={banner.name} layout="responsive" priority quality={100} width={banner.width} height={banner.height} />
+            <Image
+              src={banner.imageUrl}
+              alt={banner.name}
+              layout="responsive"
+              priority
+              quality={100}
+              width={banner.width}
+              height={banner.height}
+            />
           </Box>
         ))}
       </Carousel>

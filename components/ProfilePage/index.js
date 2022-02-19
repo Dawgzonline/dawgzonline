@@ -39,7 +39,7 @@ const ProfileInput = ({ title, content, inputName, show = true }) => {
           >
             {title}
           </Typography>
-          {(content && show) && (
+          {content && show && (
             <Typography variant="body2" color="myprimary.main">
               {content}
             </Typography>
@@ -82,7 +82,7 @@ export default function ProfilePage() {
     {
       title: "Password",
       inputName: "password",
-      show : false
+      show: false,
     },
     {
       title: "Mobile Number",
@@ -106,7 +106,7 @@ export default function ProfilePage() {
       try {
         const data = await localFetch.get("/api/user");
         const userData = data.data;
-        setProfileItem([
+        setProfileItem((profileItem) => [
           ...profileItem.map((item) => {
             if (userData[item.inputName]) {
               return { ...item, content: userData[item.inputName] };
@@ -121,7 +121,7 @@ export default function ProfilePage() {
     if (user) {
       fetch();
     }
-  }, [user]);
+  }, [user, localFetch]);
   const { handleSubmission } = useForm({
     postTo: "/api/user/",
     contentType: formContentType.urlencoded,

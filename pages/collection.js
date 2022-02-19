@@ -1,17 +1,11 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ProductsPage from "../components/ProductsPage";
 import sanityClient from "../sanity/client";
 
 export default function collection({ products }) {
-  const router = useRouter();
-  const [filteredProduct, setFilteredProduct] = useState(products);
-  useEffect(() => {
-    setFilteredProduct(products);
-  }, [router.query]);
+  
   return (
     <div>
       <Head>
@@ -20,7 +14,7 @@ export default function collection({ products }) {
         <link rel="icon" href="/mini-logo.webp" />
       </Head>
       <Navbar />
-      <ProductsPage products={filteredProduct} />
+      <ProductsPage products={products} />
       <Footer />
     </div>
   );
