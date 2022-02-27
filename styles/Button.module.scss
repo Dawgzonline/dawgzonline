@@ -1,5 +1,5 @@
 .styledButton {
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   border: none;
   background-color: var(--background-color);
   cursor: pointer;
@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   gap: 0.5rem;
   color: var(--dark-color);
 

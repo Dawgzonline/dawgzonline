@@ -29,31 +29,39 @@ const theme = createTheme({
   typography: {
     h1: {
       //Normal font
+      fontFamily: "'Libre Franklin', 'sans-serif'",
       fontSize: "2rem",
       fontWeight: 800,
     },
     h2: {
       //Curvy font
+      fontFamily: "'Libre Franklin', 'sans-serif'",
       fontSize: "5rem",
       fontWeight: 800,
     },
     h4: {
+      fontFamily: "'Libre Franklin', 'sans-serif'",
       fontSize: "1.5rem",
       fontWeight: 800,
     },
     subtitle1: {
-      fontSize: "1rem",
-      fontWeight: 800,
+      fontFamily: "'Libre Franklin', 'sans-serif'",
+      fontSize: "1.2rem",
+      fontWeight: 600,
     },
     subtitle2: {
+      fontFamily: "'Libre Franklin', 'sans-serif'",
       fontSize: "1rem",
+      lineHeight : 1.2,
       fontWeight: 600,
     },
     body1: {
-      fontSize: "0.8rem",
-      fontWeight: 600,
+      fontFamily: "'Libre Franklin', 'sans-serif'",
+      fontSize: "1rem",
+      fontWeight: 400,
     },
     body2: {
+      fontFamily: "'Libre Franklin', 'sans-serif'",
       fontWeight: 400,
       fontSize: "0.8rem",
     },

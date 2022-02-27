@@ -15,7 +15,7 @@ export default function Footer() {
               history.push("/about");
             }}
           >
-            <Typography variant="body1" color="myprimary.main">
+            <Typography variant="subtitle2" color="myprimary.main">
               About Us
             </Typography>
           </button>
@@ -25,19 +25,19 @@ export default function Footer() {
               history.push("/contact");
             }}
           >
-            <Typography variant="body1" color="myprimary.main">
+            <Typography variant="subtitle2" color="myprimary.main">
               Contact Us
             </Typography>
           </button>
         </div>
         <div className={styles.footergriditem}>
           <button style={{ textAlign: "end" }}>
-            <Typography variant="body1" color="myprimary.main">
+            <Typography variant="subtitle2" color="myprimary.main">
               FAQS
             </Typography>
           </button>
           <button style={{ textAlign: "end" }}>
-            <Typography variant="body1" color="myprimary.main">
+            <Typography variant="subtitle2" color="myprimary.main">
               INSTAGRAM
             </Typography>
           </button>

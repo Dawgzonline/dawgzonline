@@ -21,7 +21,7 @@ export default function Home({banner}) {
 
 export const getStaticProps = async() => {
   
-  const banner = await sanityClient.fetch(` *[ _type=="banner" ]{
+  const banner = await sanityClient.fetch(` *[ _type=="banner" && !(_id in path('drafts.**')) ]{
     category,
     name,
     to,
