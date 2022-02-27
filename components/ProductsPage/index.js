@@ -25,7 +25,7 @@ const FilterComponent = ({ categories }) => {
   const [query, setQuery] = useState([]);
   useEffect(() => {
     const routerQuery = router.query;
-    const queryArray = categories.map((category) => {
+    const queryArray = categories?.map((category) => {
       return routerQuery[category.label]
         ? routerQuery[category.label].split(",")
         : [];
@@ -77,7 +77,7 @@ const FilterComponent = ({ categories }) => {
                   sx={{ mt: 2, flexGrow: 1, overflowY: "scroll" }}
                   spacing={1}
                 >
-                  {categories.map((obj, index) => (
+                  {categories?.map((obj, index) => (
                     <Button
                       key={`filter_heading_${index}`}
                       sx={{ typography: "subtitle2", fontWeight: "500" }}
@@ -143,7 +143,7 @@ const FilterComponent = ({ categories }) => {
                   spacing={0.75}
                 >
                   {selectedFilter !== -1 &&
-                    categories[selectedFilter].subcategories.map(
+                    categories[selectedFilter]?.subcategories.map(
                       (obj, index) => {
                         return (
                           <FormGroup key={`filter_content_${index}`}>
@@ -326,16 +326,17 @@ const CustomDrawer = ({ filteredProduct, setFilteredProduct, categories }) => {
   const lastY = useRef(0);
   const drawer = useRef();
   useEffect(() => {
-    const eventListener = window.addEventListener("scroll", () => {
+    const handleScroll = () => {
       if (lastY.current < window.scrollY) {
         setShowDrawer(false);
       } else {
         setShowDrawer(true);
       }
       lastY.current = window.scrollY;
-    });
+    };
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", eventListener);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   return (

@@ -61,19 +61,21 @@ export default function Navbar() {
             setAnimationState(true);
             x.set(0);
           }}
+          sx={{ mx: 0.8 }}
         />
         <PersonOutlineOutlinedIcon
           className={styles.globalicons}
           onClick={() => {
             history.push("/profile");
           }}
+          sx={{ mx: 0.8 }}
         />
         <HomeOutlinedIcon
           className={styles.globalicons}
           onClick={() => {
             history.push("/");
           }}
-          style={{ marginRight: "1.75rem" }}
+          sx={{ mx: 0.8, marginRight: "1.75rem" }}
         />
         <Box
           sx={{
@@ -89,14 +91,17 @@ export default function Navbar() {
         >
           <Image alt="" src="/logo.png" width="86" height="86" />
         </Box>
-        <SearchIcon className={styles.globalicons} />
+        <SearchIcon className={styles.globalicons} sx={{ mx: 0.8 }} />
         <CustomizedBadge
           badgeContent={wishListCount}
           className={styles.badge}
           overlap="circular"
           invisible={false}
         >
-          <FavoriteBorderOutlinedIcon className={styles.globalicons} />
+          <FavoriteBorderOutlinedIcon
+            className={styles.globalicons}
+            sx={{ mx: 0.8 }}
+          />
         </CustomizedBadge>
         <CustomizedBadge
           badgeContent={cartItemCount}
@@ -104,7 +109,10 @@ export default function Navbar() {
           overlap="circular"
           invisible={false}
         >
-          <ShoppingCartOutlinedIcon className={styles.globalicons} />
+          <ShoppingCartOutlinedIcon
+            className={styles.globalicons}
+            sx={{ mx: 0.8 }}
+          />
         </CustomizedBadge>
       </div>
       <Divider

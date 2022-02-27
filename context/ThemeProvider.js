@@ -1,6 +1,10 @@
 import React from "react";
 import { brown } from "@mui/material/colors";
-import { createTheme, ThemeProvider as Provider } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider as Provider,
+  StyledEngineProvider,
+} from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
@@ -52,7 +56,7 @@ const theme = createTheme({
     subtitle2: {
       fontFamily: "'Libre Franklin', 'sans-serif'",
       fontSize: "1rem",
-      lineHeight : 1.2,
+      lineHeight: 1.2,
       fontWeight: 600,
     },
     body1: {
@@ -69,5 +73,9 @@ const theme = createTheme({
 });
 
 export default function ThemeProvider({ children }) {
-  return <Provider theme={theme}>{children}</Provider>;
+  return (
+    <StyledEngineProvider injectFirst>
+      <Provider theme={theme}>{children}</Provider>
+    </StyledEngineProvider>
+  );
 }
