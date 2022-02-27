@@ -1,7 +1,6 @@
 import { RestMethod } from "../../constant/constant";
 import { verify } from "jsonwebtoken";
 import sanityClient from "../../sanity/client";
-import sanityFetch from "../../sanity/fetch";
 
 export default async function handler(req, res) {
   const { method, headers } = req;
@@ -48,21 +47,19 @@ export default async function handler(req, res) {
         headers.authorization.split(" ")[1],
         process.env.JWT_SECRET
       );
-      const requestBody = {
-        mutations: [
+      const requestBody = [
           {
-            id: user.id,
             patch: {
+              id: user.id,
               set: {
                 ...userData,
               },
             },
           },
-        ],
-      };
+        ]
+      ;
       try {
-        const response = await sanityFetch.post("/", requestBody);
-        console.log(response.data);
+        await sanityClient.mutate(requestBody);
         res.status(201).json({ message: "User created successfully" });
       } catch (e) {
         console.log(e.response);

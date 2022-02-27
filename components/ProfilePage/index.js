@@ -93,7 +93,7 @@ export default function ProfilePage() {
       inputName: "address_1",
     },
     {
-      title: "Add Delivery Address 2",
+      title: "Delivery Address 2",
       inputName: "address_2",
     },
   ]);
