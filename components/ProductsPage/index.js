@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -16,6 +16,7 @@ import {
 import ProductCard from "./ProductCard";
 import CloseIcon from "@mui/icons-material/Close";
 import StyledButton from "../styled/Button";
+import { motion } from "framer-motion";
 
 const FilterComponent = ({ categories }) => {
   const [filterDrawer, setFilterDrawer] = useState(false);
@@ -205,8 +206,66 @@ const FilterComponent = ({ categories }) => {
   );
 };
 
-const SortComponent = (setFilteredProduct) => {
+const SortComponent = ({ filteredProduct, setFilteredProduct }) => {
   const [sortDrawer, setSortDrawer] = useState(false);
+  const [sortType, setSortType] = useState("relevance");
+  const changedByMe = useRef(false);
+  const sortProduct = useCallback(() => {
+    if (sortType === "priceUp") {
+      setFilteredProduct((filteredProduct) => [
+        ...filteredProduct.sort((a, b) => {
+          return a.discountedPrice - b.discountedPrice;
+        }),
+      ]);
+      changedByMe.current = true;
+    } else if (sortType === "priceDown") {
+      setFilteredProduct((filteredProduct) => [
+        ...filteredProduct.sort((a, b) => {
+          return b.discountedPrice - a.discountedPrice;
+        }),
+      ]);
+      changedByMe.current = true;
+    } else if (sortType === "discount") {
+      setFilteredProduct((filteredProduct) => [
+        ...filteredProduct.sort((a, b) => {
+          return (
+            (a.discountedPrice / a.originalPrice) * 100 -
+            (b.discountedPrice / b.originalPrice) * 100
+          );
+        }),
+      ]);
+      changedByMe.current = true;
+    } else if (sortType === "relevance") {
+      setFilteredProduct((filteredProduct) => [
+        ...filteredProduct.sort((a, b) => {
+          const x = a.subcategories
+            .map(({ label }) => label)
+            .sort()
+            .reduce((prev, cur) => {
+              return prev + cur + ",";
+            }, "");
+          const y = b.subcategories
+            .map(({ label }) => label)
+            .sort()
+            .reduce((prev, cur) => {
+              return prev + cur + ",";
+            }, "");
+          return x > y ? 1 : x === y ? 0 : -1;
+        }),
+      ]);
+      changedByMe.current = true;
+    }
+  }, [sortType]);
+  useEffect(() => {
+    sortProduct();
+  }, [sortType]);
+  useEffect(() => {
+    if (changedByMe.current) {
+      changedByMe.current = false;
+    } else {
+      sortProduct();
+    }
+  }, [filteredProduct]);
   return (
     <>
       <Button
@@ -227,7 +286,14 @@ const SortComponent = (setFilteredProduct) => {
           <Typography variant="subtitle2" color="primary.main">
             Sort By
           </Typography>
-          <RadioGroup sx={{ py: 1 }} defaultValue="relevance">
+          <RadioGroup
+            sx={{ py: 1 }}
+            value={sortType}
+            onChange={(e) => {
+              setSortDrawer(false);
+              setSortType(e.target.value);
+            }}
+          >
             <FormControlLabel
               control={<Radio />}
               label="Relevance"
@@ -255,7 +321,23 @@ const SortComponent = (setFilteredProduct) => {
   );
 };
 
-const CustomDrawer = ({ setFilteredProduct, categories }) => {
+const CustomDrawer = ({ filteredProduct, setFilteredProduct, categories }) => {
+  const [showDrawer, setShowDrawer] = useState(true);
+  const lastY = useRef(0);
+  const drawer = useRef();
+  useEffect(() => {
+    const eventListener = window.addEventListener("scroll", () => {
+      if (lastY.current < window.scrollY) {
+        setShowDrawer(false);
+      } else {
+        setShowDrawer(true);
+      }
+      lastY.current = window.scrollY;
+    });
+    return () => {
+      window.removeEventListener("scroll", eventListener);
+    };
+  }, []);
   return (
     <Box
       sx={{
@@ -265,6 +347,10 @@ const CustomDrawer = ({ setFilteredProduct, categories }) => {
         width: "100%",
         backgroundColor: "secondary.light",
       }}
+      component={motion.div}
+      ref={drawer}
+      animate={showDrawer ? { y: 0, opacity : 1 } : { y: 100, opacity : 0 }}
+      transition={{ type: "spring", bounce: 0.1 }}
     >
       <Grid
         container
@@ -285,7 +371,10 @@ const CustomDrawer = ({ setFilteredProduct, categories }) => {
             borderRightColor: "secondary.main",
           }}
         >
-          <SortComponent setFilteredProduct={setFilteredProduct} />
+          <SortComponent
+            setFilteredProduct={setFilteredProduct}
+            filteredProduct={filteredProduct}
+          />
         </Grid>
         <Grid
           item
@@ -329,17 +418,52 @@ export default function ProductsPage({ products, categories }) {
   }, [router.query]);
   return (
     <Box sx={{ p: 1 }}>
-      <Grid container spacing={2}>
-        {filteredProduct.map((product, index) => (
-          <Grid key={`product_${index}`} item xs={6}>
-            <ProductCard product={product} />
+      {filteredProduct.length === 0 && (
+        <Stack
+          spacing={2}
+          sx={{
+            p: 2,
+            minHeight: "calc(100vh - calc( var(--navbar-height) + 5.5rem) )",
+          }}
+        >
+          <Typography variant="h4" color="primary.main">
+            {" "}
+            Sorry no product found .
+          </Typography>
+          <Typography variant="subtitle2" color="primary.light">
+            Please select different filter, If applied.
+          </Typography>
+          <Typography variant="subtitle2" color="primary.light">
+            We do not have any product in this category. Please contact owner
+            for further discussion.
+          </Typography>
+
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <StyledButton
+              text={"All Products"}
+              onClick={() => {
+                router.push("/collection");
+              }}
+            />
+          </Box>
+        </Stack>
+      )}
+      {filteredProduct.length !== 0 && (
+        <>
+          <Grid container spacing={2}>
+            {filteredProduct.map((product, index) => (
+              <Grid key={`product_${index}`} item xs={6}>
+                <ProductCard product={product} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      <CustomDrawer
-        setFilteredProduct={setFilteredProduct}
-        categories={categories}
-      />
+          <CustomDrawer
+            setFilteredProduct={setFilteredProduct}
+            categories={categories}
+            filteredProduct={filteredProduct}
+          />
+        </>
+      )}
     </Box>
   );
 }
