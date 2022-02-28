@@ -23,6 +23,7 @@ export const getServerSideProps = async ({ params }) => {
         _id,
         description,
         "mainVariant" : mainVariant->{
+          _id,
           originalPrice,
           discountedPrice,
           amount,
@@ -31,6 +32,7 @@ export const getServerSideProps = async ({ params }) => {
           description
         },
       "variants" : variants[]->{
+          _id,
         originalPrice,
           discountedPrice,
           amount,

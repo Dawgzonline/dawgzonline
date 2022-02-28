@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import NavCollection from "./NavCollection";
-import { AppStateContext } from "../../context/AppstateProvider";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,6 +18,7 @@ import {
   useTransform,
 } from "framer-motion";
 import styles from "../../styles/Nav.module.scss";
+import { AppStateContext } from "../../context/AppstateProvider";
 
 const CustomizedBadge = styled(Badge)`
   & .MuiBadge-badge {
@@ -28,8 +28,7 @@ const CustomizedBadge = styled(Badge)`
 `;
 
 export default function Navbar() {
-  const [wishListCount] = useState(0);
-  const [cartItemCount] = useState(0);
+  const { cart, wishlist } = useContext(AppStateContext);
   const history = useRouter();
   const x = useSpring(-100);
   const transform = useMotionTemplate`translateX(${x}%)`;
@@ -93,10 +92,13 @@ export default function Navbar() {
         </Box>
         <SearchIcon className={styles.globalicons} sx={{ mx: 0.8 }} />
         <CustomizedBadge
-          badgeContent={wishListCount}
+          badgeContent={wishlist.length}
           className={styles.badge}
           overlap="circular"
           invisible={false}
+          onClick={() => {
+            history.push("/wishlist");
+          }}
         >
           <FavoriteBorderOutlinedIcon
             className={styles.globalicons}
@@ -104,10 +106,13 @@ export default function Navbar() {
           />
         </CustomizedBadge>
         <CustomizedBadge
-          badgeContent={cartItemCount}
+          badgeContent={cart.length}
           className={styles.badge}
           overlap="circular"
           invisible={false}
+          onClick={() => {
+            history.push("/cart");
+          }}
         >
           <ShoppingCartOutlinedIcon
             className={styles.globalicons}

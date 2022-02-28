@@ -4,6 +4,8 @@ import Carousel from "../Carousel";
 import Image from "next/image";
 import { getWidthAndHeight, getTextFromDescription } from "../../libs/utility";
 import StyledButton from "../styled/Button";
+import useCart from "../../hooks/useCart";
+import useWishlist from "../../hooks/useWishlist";
 
 function ProductPage({ product }) {
   const variantImages =
@@ -33,6 +35,8 @@ function ProductPage({ product }) {
       : [product.mainVariant];
   const [selectedVariant, setSelectedVariant] = useState(0);
   const paragraphs = getTextFromDescription(product?.description);
+  const { addToCart } = useCart();
+  const { addToWishlist } = useWishlist();
   return (
     <Box
       sx={{
@@ -213,7 +217,7 @@ function ProductPage({ product }) {
       <Box
         sx={{
           p: 2,
-          py : 3,
+          py: 3,
           backgroundColor: "secondary.main",
           display: "flex",
           flexDirection: "column",
@@ -221,8 +225,26 @@ function ProductPage({ product }) {
           alignItems: "center",
         }}
       >
-        <StyledButton text={"ADD TO CART"} style={{ width: "100%" }} />
-        <StyledButton text={"ADD TO WISHLIST"} style={{ width: "100%" }} />
+        <StyledButton
+          text={"ADD TO CART"}
+          style={{ width: "100%" }}
+          onClick={() => {
+            addToCart({
+              product: product._id,
+              variant: variants[selectedVariant]._id,
+            });
+          }}
+        />
+        <StyledButton
+          text={"ADD TO WISHLIST"}
+          style={{ width: "100%" }}
+          onClick={() => {
+            addToWishlist({
+              product: product._id,
+              variant: variants[selectedVariant]._id,
+            });
+          }}
+        />
       </Box>
     </Box>
   );

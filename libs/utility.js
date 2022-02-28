@@ -16,3 +16,17 @@ export const getTextFromDescription = (description) => {
       .trim();
   });
 };
+
+export const arrayIncludes = (arr, obj) => {
+  return arr.find((arrObj) => {
+    let ans = false;
+    for (let [key, value] of Object.entries(obj)) {
+      if (arrObj[key] === value) {
+        ans = true;
+        continue;
+      }
+      ans = false;
+    }
+    return ans;
+  });
+};
