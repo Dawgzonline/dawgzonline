@@ -8,15 +8,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useRouter } from "next/router";
+import { getTextFromDescription } from "../../libs/utility";
 
 function ProductCard({ product }) {
-  const paragraphs = product?.description?.map((para) => {
-    return para.children
-      .reduce((prev, cur) => {
-        return prev + " " + cur.text;
-      }, "")
-      .trim();
-  });
+  const paragraphs = getTextFromDescription(product?.description);
   const router = useRouter();
   return (
     <Card

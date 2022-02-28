@@ -20,12 +20,29 @@ export default function product({ product }) {
 export const getServerSideProps = async ({ params }) => {
   const [product] =
     await sanityClient.fetch(` *[ _type=="product" && _id=="${params.id}" && !(_id in path('drafts.**')) ]{
-    _id,
-    description,
-    "discountedPrice" : mainVariant->discountedPrice,
-    name,
-    "originalPrice" : mainVariant->originalPrice,
-    "imageUrl" : image.asset->url,
+        _id,
+        description,
+        "mainVariant" : mainVariant->{
+          originalPrice,
+          discountedPrice,
+          amount,
+          label,
+          "images" : images[].asset->url,
+          description
+        },
+      "variants" : variants[]->{
+        originalPrice,
+          discountedPrice,
+          amount,
+        label,
+          "images" : images[].asset->url,
+        description
+      },
+        name,
+        "imageUrl" : image.asset->url,
+      rating,
+      reviews,
+      express_delivery 
   } `);
   return {
     props: {

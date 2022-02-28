@@ -424,7 +424,7 @@ export default function ProductsPage({ products, categories }) {
           spacing={2}
           sx={{
             p: 2,
-            minHeight: "calc(100vh - calc( var(--navbar-height) + 5.5rem) )",
+            minHeight: "var(--window-height)",
           }}
         >
           <Typography variant="h4" color="primary.main">
