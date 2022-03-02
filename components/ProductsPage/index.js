@@ -31,7 +31,7 @@ const FilterComponent = ({ categories }) => {
         : [];
     });
     setQuery(queryArray);
-  }, [router.query]);
+  }, [router.query, categories]);
 
   return (
     <>
@@ -255,17 +255,17 @@ const SortComponent = ({ filteredProduct, setFilteredProduct }) => {
       ]);
       changedByMe.current = true;
     }
-  }, [sortType]);
+  }, [sortType, setFilteredProduct]);
   useEffect(() => {
     sortProduct();
-  }, [sortType]);
+  }, [sortProduct]);
   useEffect(() => {
     if (changedByMe.current) {
       changedByMe.current = false;
     } else {
       sortProduct();
     }
-  }, [filteredProduct]);
+  }, [filteredProduct, sortProduct]);
   return (
     <>
       <Button
@@ -350,7 +350,7 @@ const CustomDrawer = ({ filteredProduct, setFilteredProduct, categories }) => {
       }}
       component={motion.div}
       ref={drawer}
-      animate={showDrawer ? { y: 0, opacity : 1 } : { y: 100, opacity : 0 }}
+      animate={showDrawer ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
       transition={{ type: "spring", bounce: 0.1 }}
     >
       <Grid
@@ -416,7 +416,7 @@ export default function ProductsPage({ products, categories }) {
         return true;
       }),
     ]);
-  }, [router.query]);
+  }, [router.query, products]);
   return (
     <Box sx={{ p: 1 }}>
       {filteredProduct.length === 0 && (

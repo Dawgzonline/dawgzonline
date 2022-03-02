@@ -17,16 +17,20 @@ export const getTextFromDescription = (description) => {
   });
 };
 
+export const isObjectEqual = (objA, objB) => {
+  let ans = false;
+  for (let [key, value] of Object.entries(objB)) {
+    if (objA[key] === value) {
+      ans = true;
+      continue;
+    }
+    ans = false;
+  }
+  return ans;
+};
+
 export const arrayIncludes = (arr, obj) => {
   return arr.find((arrObj) => {
-    let ans = false;
-    for (let [key, value] of Object.entries(obj)) {
-      if (arrObj[key] === value) {
-        ans = true;
-        continue;
-      }
-      ans = false;
-    }
-    return ans;
+    return isObjectEqual(arrObj, obj);
   });
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppStateContext } from "../context/AppstateProvider";
-import { arrayIncludes } from "../libs/utility";
+import { arrayIncludes, isObjectEqual } from "../libs/utility";
 
 function useCart() {
   const { cart, modifyCart } = useContext(AppStateContext);
@@ -9,7 +9,10 @@ function useCart() {
       modifyCart([...cart, data]);
     }
   };
-  return { cart, addToCart };
+  const deleteFromCart = (data) => {
+    modifyCart([...cart.filter((obj) => !isObjectEqual(data, obj))]);
+  };
+  return { cart, addToCart, deleteFromCart };
 }
 
 export default useCart;

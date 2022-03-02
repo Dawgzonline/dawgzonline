@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppStateContext } from "../context/AppstateProvider";
-import { arrayIncludes } from "../libs/utility";
+import { arrayIncludes, isObjectEqual } from "../libs/utility";
 
 function useWishlist() {
   const { wishlist, modifyWishList } = useContext(AppStateContext);
@@ -9,7 +9,10 @@ function useWishlist() {
       modifyWishList([...wishlist, data]);
     }
   };
-  return { wishlist, addToWishlist };
+  const deleteFromWishlist = (data) => {
+    modifyWishList([...wishlist.filter((obj) => !isObjectEqual(data, obj))]);
+  };
+  return { wishlist, addToWishlist, deleteFromWishlist };
 }
 
 export default useWishlist;

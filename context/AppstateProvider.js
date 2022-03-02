@@ -120,10 +120,10 @@ export default function AppstateProvider({ children }) {
     const cartItem = JSON.parse(localStorage.getItem("cart"));
     const wishlistItem = JSON.parse(localStorage.getItem("wishlist"));
     if (cartItem) {
-      setCart();
+      setCart(cartItem);
     }
     if (wishlistItem) {
-      setWishList();
+      setWishList(wishlistItem);
     }
   }, []);
 
