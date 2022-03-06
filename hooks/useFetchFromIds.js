@@ -25,6 +25,7 @@ function useFetchFromIds(from, data) {
       setFetchedData([...newData.product]);
       setLoading(false);
     };
+    setLoading(false);
     if (data && data.length !== 0 && from) {
       setLoading(true);
       fetchFunc();

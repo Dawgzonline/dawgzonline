@@ -37,7 +37,7 @@ function ProductPage({ product }) {
   const paragraphs = getTextFromDescription(product?.description);
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
-  console.log(product._id, variants[selectedVariant]._id)
+  console.log(product._id, variants[selectedVariant]._id);
   return (
     <Box
       sx={{
@@ -121,6 +121,11 @@ function ProductPage({ product }) {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    cursor : "pointer",
+                    backgroundColor:
+                      index === selectedVariant
+                        ? "secondary.main"
+                        : "secondary.light",
                   }}
                   onClick={() => {
                     setSelectedVariant(index);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -17,15 +17,62 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getTextFromDescription } from "../../libs/utility";
 import Input from "../styled/Input";
 import useWishlist from "../../hooks/useWishlist";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
-const CartCard = ({ product, deleteVariant }) => {
+const InputNumberBox = ({ quantity, addVariant, removeVariant, sx }) => {
+  return (
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplate: '"a b c" 2rem/ 1fr 1fr 1fr',
+        width: "6rem",
+        ...sx,
+      }}
+    >
+      <IconButton
+        color="primary"
+        onClick={() => {
+          addVariant();
+        }}
+        sx={{ fontSize: "1rem", gridArea: "a" }}
+      >
+        <AddIcon />
+      </IconButton>
+      <Typography
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        variant="subtitle2"
+        color="primary.main"
+      >
+        {quantity}
+      </Typography>
+      <IconButton
+        color="primary"
+        onClick={() => {
+          removeVariant();
+        }}
+        sx={{ fontSize: "1rem", gridArea: "c" }}
+      >
+        <RemoveIcon />
+      </IconButton>
+    </Box>
+  );
+};
+
+const CartCard = ({
+  product,
+  deleteVariant,
+  addVariant,
+  removeVariant,
+  quantity,
+}) => {
   const paragraphs = getTextFromDescription(product?.description);
   const { addToWishlist } = useWishlist();
   return (
     <>
       {product?.variants.map((variant, index) => (
         <Grid item xs={12} key={`variant_${index}`}>
-          <Card sx={{ display: "flex", gap: 1 }}>
+          <Card sx={{ display: "flex", gap: 1, position: "relative" }}>
             <CardMedia
               component="img"
               image={variant.images ? variant.images[0] : product.image}
@@ -126,18 +173,53 @@ const CartCard = ({ product, deleteVariant }) => {
                 You save Rs.{variant.originalPrice - variant.discountedPrice}
               </Typography>
             </Box>
+            {variant.amount === 0 && (
+              <Box
+                sx={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(255,255,255,0.4)",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    backgroundColor: "secondary.main",
+                    color: "primary.main",
+                    px: 2,
+                    py: 0.4,
+                  }}
+                >
+                  Out of Stock
+                </Typography>
+              </Box>
+            )}
           </Card>
           <Box
             sx={{
               backgroundColor: "secondary.main",
               display: "flex",
-              justifyContent: "flex-end",
+              justifyContent: "flex-start",
+              alignItems: "center",
               gap: 2,
             }}
           >
+            <InputNumberBox
+              addVariant={() => {
+                addVariant({ product: product._id, variant: variant._id });
+              }}
+              removeVariant={() => {
+                removeVariant({ product: product._id, variant: variant._id });
+              }}
+              quantity={quantity[variant._id]}
+              sx={{ mr: 1 }}
+            />
             <IconButton
               color="primary"
-              sx={{ fontSize: "1rem" }}
+              sx={{ fontSize: "1rem", marginLeft: "auto" }}
               onClick={() => {
                 addToWishlist({ product: product._id, variant: variant._id });
               }}
@@ -161,12 +243,46 @@ const CartCard = ({ product, deleteVariant }) => {
 };
 
 function Cart() {
-  const { cart, deleteFromCart } = useCart();
+  const { cart, deleteFromCart, addToCart, removeFromCart } = useCart();
   const [doFetch, setDoFetch] = useState(true);
   const [cartItem, loading, setCartItem] = useFetchFromIds(
     "/api/product",
     doFetch ? cart : []
   );
+  const [quantity, setQuantity] = useState({});
+  useEffect(() => {
+    const newQuantity = {};
+    for (let item of cart) {
+      newQuantity[item.variant] = item.amount;
+    }
+    setQuantity(newQuantity);
+  }, [cart]);
+  const addVariant = (obj) => {
+    setDoFetch(false);
+    addToCart(obj);
+  };
+  const removeVariant = (obj) => {
+    setDoFetch(false);
+    removeFromCart(obj);
+    if (quantity[obj.variant] === 1) {
+      setCartItem([
+        ...cartItem
+          .map((item) => {
+            if (item._id === obj.product) {
+              let newVariants = item.variants.filter(
+                (variant) => variant._id !== obj.variant
+              );
+              if (newVariants.length === 0) {
+                return null;
+              }
+              return { ...item, variants: newVariants };
+            }
+            return item;
+          })
+          .filter((item) => !!item),
+      ]);
+    }
+  };
   const deleteVariant = (obj) => {
     setDoFetch(false);
     deleteFromCart(obj);
@@ -190,7 +306,10 @@ function Cart() {
   const totalCost = cartItem.reduce((prev, item) => {
     return (
       prev +
-      item.variants.reduce((prev, variant) => prev + variant.originalPrice, 0)
+      item.variants.reduce(
+        (prev, variant) => prev + variant.originalPrice * quantity[variant._id],
+        0
+      )
     );
   }, 0);
   const totalSaving = cartItem.reduce((prev, item) => {
@@ -198,7 +317,9 @@ function Cart() {
       prev +
       item.variants.reduce(
         (prev, variant) =>
-          prev + (variant.originalPrice - variant.discountedPrice),
+          prev +
+          (variant.originalPrice - variant.discountedPrice) *
+            quantity[variant._id],
         0
       )
     );
@@ -240,6 +361,9 @@ function Cart() {
                 product={item}
                 key={`cart_card_${index}`}
                 deleteVariant={deleteVariant}
+                addVariant={addVariant}
+                removeVariant={removeVariant}
+                quantity={quantity}
               />
             ))}
           </Grid>

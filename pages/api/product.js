@@ -30,6 +30,9 @@ export default async function handler(req, res) {
               discountedPrice,
               "images" : images[].asset->url
             },
+            "subcategories" : categories[]->{
+              "label" : label.current,
+            }
           }`
         );
         res.status(200).json({ product: response });
