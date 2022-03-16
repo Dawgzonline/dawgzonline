@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import GoogleIcon from "@mui/icons-material/Google";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -8,6 +7,9 @@ import useForm from "../../hooks/useForm";
 import styles from "../../styles/Signup.module.scss";
 import { error, formContentType } from "../../constant/constant";
 import Button from "../styled/Button";
+import { useRouter } from "next/router";
+import { authentication } from "../../constant/constant";
+import GoogleBtn from "../GoogleBtn";
 
 export default function SignUpPage() {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -51,6 +53,8 @@ export default function SignUpPage() {
     return true;
   };
 
+  const router = useRouter();
+
   const { handleSubmission } = useForm({
     contentType: formContentType.urlencoded,
     postTo: "/api/signup",
@@ -59,6 +63,7 @@ export default function SignUpPage() {
       return isValid ? { error: false } : { error: true };
     },
     afterSubmission: (res) => {
+      router.push("/");
       console.log(res);
     },
     error: (msg) => {
@@ -207,6 +212,35 @@ export default function SignUpPage() {
             </Typography>
           </button> */}
           <Button text="CREATE ACCOUNT" type="submit" />
+          <GoogleBtn
+            action={authentication.signup}
+            setError={(msg) => {
+              setError(msg);
+            }}
+          />
+          <Box component="ul">
+            <Typography
+              variant="body2"
+              variantMapping={{ body2: "li" }}
+              color="myprimary.main"
+              onClick={() => {
+                router.push("/forget-password");
+              }}
+            >
+              Forgot Password?
+            </Typography>
+
+            <Typography
+              variant="body2"
+              variantMapping={{ body2: "li" }}
+              color="myprimary.main"
+              onClick={() => {
+                router.push("/login");
+              }}
+            >
+              Existing User ? Login
+            </Typography>
+          </Box>
         </form>
         {/* <button>
           <GoogleIcon />{" "}
@@ -214,7 +248,6 @@ export default function SignUpPage() {
             SIGN UP WITH GOOGLE
           </Typography>
         </button> */}
-        <Button icon={<GoogleIcon />} text=" SIGN UP WITH GOOGLE" />
       </div>
     </div>
   );

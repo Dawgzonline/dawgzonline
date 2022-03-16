@@ -142,6 +142,7 @@ export default function Navbar() {
               key={`nav-collection-${index}`}
               heading={collectionItem.heading}
               content={collectionItem.content}
+              closeNav={closeNav}
             />
           ))}
 

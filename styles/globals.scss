@@ -31,3 +31,7 @@ code {
   --navbar-height: 5.5rem;
   --window-height : calc(100vh - calc( var(--navbar-height) + 6rem) );
 }
+
+input {
+  padding : 0.5rem,
+}

@@ -123,8 +123,10 @@ const FilterComponent = ({ categories }) => {
                     }, "");
                     const newRoute =
                       route.length === 0
-                        ? ""
-                        : "?" + route.slice(1, route.length);
+                        ? router.asPath.split("?")[0]
+                        : router.asPath.split("?")[0] +
+                          "?" +
+                          route.slice(1, route.length);
                     setFilterDrawer(false);
                     router.push(newRoute, undefined, { shallow: true });
                   }}
@@ -406,4 +408,4 @@ const CustomDrawer = ({ filteredProduct, setFilteredProduct, categories }) => {
   );
 };
 
-export default CustomDrawer
+export default CustomDrawer;

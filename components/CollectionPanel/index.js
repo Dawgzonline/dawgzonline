@@ -2,10 +2,10 @@ import React from "react";
 import { Stack, Button } from "@mui/material";
 import { useRouter } from "next/router";
 
-export default function CollectionPanel({ content, rightOriented }) {
+export default function CollectionPanel({ content, rightOriented, closeNav }) {
   const router = useRouter();
   return (
-    <Stack sx={{ width: "100%", py : 1 }}>
+    <Stack sx={{ width: "100%", py: 1 }}>
       {content.map(({ title, id, to }) => (
         <Button
           sx={{
@@ -13,10 +13,15 @@ export default function CollectionPanel({ content, rightOriented }) {
             display: "flex",
             textAlign: "center",
             justifyContent: rightOriented ? "flex-end" : "flex-start",
-            fontSize : "0.8rem",
+            fontSize: "0.8rem",
           }}
           key={`collection-btn-${id}`}
-          onClick={()=>{ router.push(to) }}
+          onClick={() => {
+            router.push(to);
+            if (closeNav) {
+              closeNav();
+            }
+          }}
         >
           {title}
         </Button>

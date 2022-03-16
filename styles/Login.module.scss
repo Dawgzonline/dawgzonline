@@ -35,15 +35,14 @@
 .login_info .global_icons {
   position: absolute;
   font-size: 0.8rem;
-  right: 0;
-  top: 0.2rem;
+  right: 0.5rem;
+  top : 50%;
+  transform: translateY(-50%);
   color: var(--dark-color);
 }
 
 .login_details > button {
   align-self: center;
-  height: 1.8rem;
-  width: 10rem;
   border-radius: 1rem;
   border: none;
   background-color: var(--background-color);

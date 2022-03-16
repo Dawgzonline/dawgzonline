@@ -6,6 +6,7 @@
 .signup_inner_container {
   background-color: var(--background-color);
   padding: 0rem 3rem 2rem 3rem;
+  min-height: calc( 100vh - 5rem);
 }
 
 .signup_inner_container > h1 {
@@ -15,10 +16,29 @@
 .signup_inner_container > form {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  & > ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: flex-end;
+    padding-bottom: 1rem;
+  }
+
+  & > ul > li {
+    list-style: none;
+    border: none;
+    border-bottom: 0.1rem solid var(--light-color);
+  }
 }
 
 .signup_inner_container > form > * {
   margin: 0.25rem;
+}
+
+.signup_inner_container > form > p {
+  padding: 0rem 0.5rem;
 }
 
 .signup_inner_container > form > button {

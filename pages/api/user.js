@@ -14,7 +14,6 @@ export default async function handler(req, res) {
           headers.authorization.split(" ")[1],
           process.env.JWT_SECRET
         );
-        console.log(user);
         const data =
           await sanityClient.fetch(` *[ _type=="user" && _id=="${user.id}" ]{
             firstName,
@@ -25,7 +24,6 @@ export default async function handler(req, res) {
             address_1,
             address_2,
         } `);
-        console.log(data);
         res.status(200).json({ ...data[0] });
       } catch (e) {
         console.log(e);
