@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import NavCollection from "./NavCollection";
-import { AppStateContext } from "../../context/AppstateProvider";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,6 +18,7 @@ import {
   useTransform,
 } from "framer-motion";
 import styles from "../../styles/Nav.module.scss";
+import { AppStateContext } from "../../context/AppstateProvider";
 
 const CustomizedBadge = styled(Badge)`
   & .MuiBadge-badge {
@@ -28,8 +28,7 @@ const CustomizedBadge = styled(Badge)`
 `;
 
 export default function Navbar() {
-  const [wishListCount] = useState(0);
-  const [cartItemCount] = useState(0);
+  const { cart, wishlist } = useContext(AppStateContext);
   const history = useRouter();
   const x = useSpring(-100);
   const transform = useMotionTemplate`translateX(${x}%)`;
@@ -61,19 +60,21 @@ export default function Navbar() {
             setAnimationState(true);
             x.set(0);
           }}
+          sx={{ mx: 0.8 }}
         />
         <PersonOutlineOutlinedIcon
           className={styles.globalicons}
           onClick={() => {
             history.push("/profile");
           }}
+          sx={{ mx: 0.8 }}
         />
         <HomeOutlinedIcon
           className={styles.globalicons}
           onClick={() => {
             history.push("/");
           }}
-          style={{ marginRight: "1.75rem" }}
+          sx={{ mx: 0.8, marginRight: "1.75rem" }}
         />
         <Box
           sx={{
@@ -89,22 +90,34 @@ export default function Navbar() {
         >
           <Image alt="" src="/logo.png" width="86" height="86" />
         </Box>
-        <SearchIcon className={styles.globalicons} />
+        <SearchIcon className={styles.globalicons} sx={{ mx: 0.8 }} />
         <CustomizedBadge
-          badgeContent={wishListCount}
+          badgeContent={wishlist.length}
           className={styles.badge}
           overlap="circular"
           invisible={false}
+          onClick={() => {
+            history.push("/wishlist");
+          }}
         >
-          <FavoriteBorderOutlinedIcon className={styles.globalicons} />
+          <FavoriteBorderOutlinedIcon
+            className={styles.globalicons}
+            sx={{ mx: 0.8 }}
+          />
         </CustomizedBadge>
         <CustomizedBadge
-          badgeContent={cartItemCount}
+          badgeContent={cart.length}
           className={styles.badge}
           overlap="circular"
           invisible={false}
+          onClick={() => {
+            history.push("/cart");
+          }}
         >
-          <ShoppingCartOutlinedIcon className={styles.globalicons} />
+          <ShoppingCartOutlinedIcon
+            className={styles.globalicons}
+            sx={{ mx: 0.8 }}
+          />
         </CustomizedBadge>
       </div>
       <Divider
@@ -129,6 +142,7 @@ export default function Navbar() {
               key={`nav-collection-${index}`}
               heading={collectionItem.heading}
               content={collectionItem.content}
+              closeNav={closeNav}
             />
           ))}
 

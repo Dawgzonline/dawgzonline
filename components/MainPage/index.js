@@ -5,19 +5,12 @@ import CollectionsMini from "../CollectionsMini";
 import { Box } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { getWidthAndHeight } from "../../libs/utility";
 
 function MainPage({ banner }) {
   const router = useRouter();
   const { collection } = useContext(AppStateContext);
   const collectionForCM = [collection[1], collection[0]];
-  const getWidthAndHeight = (url) => {
-    const imageName = url.split("/");
-    const data = imageName[imageName.length - 1]
-      .split("-")[1]
-      .split(".")[0]
-      .split("x");
-    return data;
-  };
   const top_banner = useMemo(() => {
     const filteredData = banner.filter(
       (post) => post.category === "top_banner"

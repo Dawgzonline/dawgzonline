@@ -2,7 +2,7 @@
   "name": "dawgzonline",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5000",
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",
@@ -12,7 +12,7 @@
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.1",
-    "@mui/material": "^5.2.3",
+    "@mui/material": "^5.2.6",
     "@sanity/client": "^2.23.2",
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
@@ -24,6 +24,7 @@
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-google-login": "^5.2.2",
     "sass": "^1.47.0",
     "sharp": "^0.29.3",
     "uuid": "^8.3.2"

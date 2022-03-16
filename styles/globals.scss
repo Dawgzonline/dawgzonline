@@ -29,4 +29,9 @@ code {
   --text-light-color: rgb(253, 246, 214);
   --icon-size: 1rem;
   --navbar-height: 5.5rem;
+  --window-height : calc(100vh - calc( var(--navbar-height) + 6rem) );
+}
+
+input {
+  padding : 0.5rem,
 }

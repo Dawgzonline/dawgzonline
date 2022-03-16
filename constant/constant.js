@@ -21,3 +21,8 @@ export const RestMethod = {
     patch : "PATCH",
     delete : "DELETE",
 }
+
+export const authentication = {
+    login : "Login",
+    signup : "Registration"
+}

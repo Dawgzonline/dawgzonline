@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "../../styles/Carousel.module.scss";
 import { Fab } from "@mui/material";
 
-function Carousel({ children }) {
+function Carousel({ children, dots = true }) {
   const [currImg, setCurrImg] = useState(0);
   const carouselTraverse = useRef(0);
   const childrenArray = Children.toArray(children);
@@ -76,17 +76,19 @@ function Carousel({ children }) {
           </Fab>
         </div>
       </div>
-      <div className={styles.carousel_bottom}>
-        {childrenArray.map((child, index) => (
-          <div
-            key={`carousel_child_dot_${index}`}
-            className={styles.carousel_bottom_dots}
-            style={{
-              backgroundColor: currImg === index ? "var(--dark-color)" : "",
-            }}
-          ></div>
-        ))}
-      </div>
+      {dots && (
+        <div className={styles.carousel_bottom}>
+          {childrenArray.map((child, index) => (
+            <div
+              key={`carousel_child_dot_${index}`}
+              className={styles.carousel_bottom_dots}
+              style={{
+                backgroundColor: currImg === index ? "var(--dark-color)" : "",
+              }}
+            ></div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

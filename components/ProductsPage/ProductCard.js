@@ -8,22 +8,22 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useRouter } from "next/router";
+import { getTextFromDescription } from "../../libs/utility";
 
 function ProductCard({ product }) {
-  const paragraphs = product?.description?.map((para) => {
-    return para.children
-      .reduce((prev, cur) => {
-        return prev + " " + cur.text;
-      }, "")
-      .trim();
-  });
+  const paragraphs = getTextFromDescription(product?.description);
   const router = useRouter();
   return (
     <Card
       onClick={() => {
         router.push(`/product/${product._id}`);
       }}
-      sx={{ minHeight: "100%", backgroundColor: "secondary.main" }}
+      sx={{
+        minHeight: "100%",
+        backgroundColor: "secondary.main",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <CardMedia
         component="img"
@@ -33,14 +33,17 @@ function ProductCard({ product }) {
       />
       <CardContent
         sx={{
+          p: 1,
+          flexGrow: 1,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          p: 1,
         }}
         style={{ paddingBottom: "0.5rem" }}
       >
-        <Stack spacing={0.5}>
+        <Stack
+          spacing={0.5}
+          sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
+        >
           <Typography variant="subtitle2" color="primary.dark">
             {product.name}
           </Typography>
@@ -56,9 +59,11 @@ function ProductCard({ product }) {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "space-between",
               gap: 0.8,
+              pt : 0.5
             }}
+            style={{ marginTop: "auto" }}
           >
             {product?.discountedPrice && (
               <Typography
@@ -96,8 +101,8 @@ function ProductCard({ product }) {
                 variant="body2"
                 variantMapping={{ body2: "span" }}
                 sx={{
-                  display : "flex",
-                  alignItems : "center",
+                  display: "flex",
+                  alignItems: "center",
                   fontSize: "0.7rem",
                 }}
               >

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Image from "next/image";
-import { Box, Alert, Typography } from "@mui/material";
+import { Box, Alert, Typography, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import useForm from "../../hooks/useForm";
 import styles from "../../styles/Login.module.scss";
@@ -9,6 +9,8 @@ import { error, formContentType } from "../../constant/constant";
 import Button from "../styled/Button";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context/AuthProvider";
+import GoogleBtn from "../GoogleBtn";
+import { authentication } from "../../constant/constant";
 
 export default function LoginPage() {
   const { addToken } = useContext(AuthContext);
@@ -87,13 +89,38 @@ export default function LoginPage() {
               <WarningAmberIcon /> {validationError.message}
             </Typography>
           )}
-
-          <Button text="LOGIN" type="submit"></Button>
+          <Box
+            sx={{
+              display: "flex",
+              p: 0.5,
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <GoogleBtn
+              action={authentication.login}
+              setError={(msg) => {
+                setError(msg);
+              }}
+            />
+          </Box>
+          <Button
+            text="LOGIN"
+            type="submit"
+            style={{
+              padding: "0.4rem 2rem",
+              borderRadius: "1.2rem",
+              marginBottom: "1rem",
+            }}
+          />
           <ul>
             <Typography
               variant="body2"
               variantMapping={{ body2: "li" }}
               color="myprimary.main"
+              onClick={() => {
+                router.push("/forget-password");
+              }}
             >
               Forgot Password?
             </Typography>
@@ -102,6 +129,9 @@ export default function LoginPage() {
               variant="body2"
               variantMapping={{ body2: "li" }}
               color="myprimary.main"
+              onClick={() => {
+                router.push("/signup");
+              }}
             >
               New User ?Sign up
             </Typography>

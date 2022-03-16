@@ -3,6 +3,37 @@
 import { RestMethod } from "../../constant/constant";
 import sanityClient from "../../sanity/client";
 import bcrypt from "bcrypt";
+import decode from "jsonwebtoken/decode";
+
+const googleRegistration = async (token, req, res) => {
+  const googleUser = decode(token);
+  const user = await sanityClient.fetch(
+    `*[ _type=="user" && email=="${googleUser.email}" ]`
+  );
+  if (user.length !== 0) {
+    res.status(409).json({ message: "User already existed" });
+    return;
+  }
+  const requestBody = {
+    _type: "user",
+    firstName: googleUser.given_name,
+    lastName: googleUser.family_name,
+    username: googleUser.email,
+    email: googleUser.email,
+    auth_type: "google_oauth",
+    googleId : googleUser.sub,
+  };
+  try {
+    const response = await sanityClient.create(requestBody);
+    console.log(response);
+    res.status(201).json({ message: "User created successfully" });
+  } catch (e) {
+    console.log(e.response);
+    res
+      .status(500)
+      .json({ message: "Something went wrong. Please try again later!" });
+  }
+};
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -13,6 +44,10 @@ export default async function handler(req, res) {
         .json({ message: "Please send signup request by post method" });
       break;
     case RestMethod.post:
+      if (req.query.googleToken) {
+        googleRegistration(req.query.googleToken, req, res);
+        break;
+      }
       const userData = req.body;
       if (!userData) {
         res.status(400).json({ message: "No data found!" });
