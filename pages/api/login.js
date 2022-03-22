@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { RestMethod } from "../../constant/constant";
-import sanityClient from "../../sanity/client";
+import sanityClient from "../../api/client";
 import bcrypt from "bcrypt";
 import { sign, decode } from "jsonwebtoken";
 

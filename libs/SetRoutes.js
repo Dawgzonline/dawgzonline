@@ -7,57 +7,63 @@ export default function SetRoutes(
   { getCallback, postCallback, deleteCallback, patchCallback },
   checkAuth = false
 ) {
-  if (checkAuth) {
-    authorization(req, res, (req, res) => {
-      SetRoutes(req, res, {
-        getCallback,
-        postCallback,
-        deleteCallback,
-        patchCallback,
+  return new Promise(async (resolve, reject) => {
+    if (checkAuth) {
+      await authorization(req, res, async (req, res) => {
+        await SetRoutes(req, res, {
+          getCallback,
+          postCallback,
+          deleteCallback,
+          patchCallback,
+        });
       });
-    });
-    return;
-  }
-  const { method } = req;
-  switch (method) {
-    case RestMethod.get:
-      if (getCallback !== undefined) {
-        getCallback(req, res);
-      } else {
+      resolve();
+      return;
+    }
+    const { method } = req;
+    switch (method) {
+      case RestMethod.get:
+        if (getCallback !== undefined) {
+          await getCallback(req, res);
+        } else {
+          res
+            .status(405)
+            .json({ message: "Please send request by valid method" });
+        }
+        break;
+      case RestMethod.post:
+        if (postCallback !== undefined) {
+          await postCallback(req, res);
+        } else {
+          res
+            .status(405)
+            .json({ message: "Please send request by valid method" });
+        }
+        break;
+      case RestMethod.patch:
+        if (patchCallback !== undefined) {
+          await patchCallback(req, res);
+        } else {
+          res
+            .status(405)
+            .json({ message: "Please send request by valid method" });
+        }
+        break;
+      case RestMethod.delete:
+        if (deleteCallback !== undefined) {
+          await deleteCallback(req, res);
+        } else {
+          res
+            .status(405)
+            .json({ message: "Please send request by valid method" });
+        }
+        break;
+      default:
         res
           .status(405)
           .json({ message: "Please send request by valid method" });
-      }
-      break;
-    case RestMethod.post:
-      if (postCallback !== undefined) {
-        postCallback(req, res);
-      } else {
-        res
-          .status(405)
-          .json({ message: "Please send request by valid method" });
-      }
-      break;
-    case RestMethod.patch:
-      if (patchCallback !== undefined) {
-        patchCallback(req, res);
-      } else {
-        res
-          .status(405)
-          .json({ message: "Please send request by valid method" });
-      }
-      break;
-    case RestMethod.delete:
-      if (deleteCallback !== undefined) {
-        deleteCallback(req, res);
-      } else {
-        res
-          .status(405)
-          .json({ message: "Please send request by valid method" });
-      }
-      break;
-    default:
-      res.status(405).json({ message: "Please send request by valid method" });
-      break;
-  }
+        break;
+    }
+    resolve();
+  });
 }

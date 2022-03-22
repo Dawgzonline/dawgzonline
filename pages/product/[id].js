@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ProductPage from "../../components/ProductPage";
-import sanityClient from "../../sanity/client";
+import sanityClient from "../../api/client";
 
 export default function product({ product }) {
   return (

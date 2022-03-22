@@ -5,7 +5,6 @@ import styles from "../../styles/Profile.module.scss";
 import useForm from "../../hooks/useForm";
 import { formContentType } from "../../constant/constant";
 import { Box, Typography } from "@mui/material";
-import getLocalFetch from "../../libs/fetch";
 import { AuthContext } from "../../context/AuthProvider";
 
 const ProfileInput = ({ title, content, inputName, show = true }) => {
@@ -98,30 +97,17 @@ export default function ProfilePage() {
     },
   ]);
 
-  const localFetch = getLocalFetch();
-  const { user } = useContext(AuthContext);
-
+  const { userData } = useContext(AuthContext);
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        const data = await localFetch.get("/api/user");
-        const userData = data.data;
-        setProfileItem((profileItem) => [
-          ...profileItem.map((item) => {
-            if (userData[item.inputName]) {
-              return { ...item, content: userData[item.inputName] };
-            }
-            return item;
-          }),
-        ]);
-      } catch (e) {
-        console.log(e.response);
-      }
-    };
-    if (user) {
-      fetch();
-    }
-  }, [user, localFetch]);
+    setProfileItem((profileItem) => [
+      ...profileItem.map((item) => {
+        if (userData[item.inputName]) {
+          return { ...item, content: userData[item.inputName] };
+        }
+        return item;
+      }),
+    ]);
+  }, [userData]);
   const { handleSubmission } = useForm({
     postTo: "/api/user/",
     contentType: formContentType.urlencoded,

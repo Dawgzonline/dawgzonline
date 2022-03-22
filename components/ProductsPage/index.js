@@ -59,7 +59,7 @@ export default function ProductsPage({ products, categories }) {
           return false;
         }),
     ]);
-  }, [router.query, products, categories]);
+  }, [router.query, products, categories, isCategory]);
   return (
     <Box sx={{ p: 1, minHeight: "calc( var(--window-height) + 200px )" }}>
       {filteredProduct.length === 0 && (

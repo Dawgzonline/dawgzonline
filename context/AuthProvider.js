@@ -1,35 +1,53 @@
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { profile } from "../constant/constant";
-import { setToken} from "../libs/fetch";
+import getLocalFetch, { setToken } from "../libs/fetch";
 
 export const AuthContext = React.createContext({ user: null });
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(false);
+  const [userData, setUserData] = useState({});
+  const router = useRouter();
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem(profile));
-    if(localData?.token){
+    if (localData?.token) {
       setToken(localData?.token);
       setUser(true);
     }
   }, []);
 
-  const addUser = (data) => {
-    setUser(data);
-  };
   const addToken = (token) => {
-    localStorage.setItem(
-      profile,
-      JSON.stringify({ token })
-    );
+    setUser(false);
+    localStorage.setItem(profile, JSON.stringify({ token }));
     setToken(token);
     setUser(true);
   };
 
+  const logout = () => {
+    localStorage.removeItem(profile);
+    localStorage.removeItem("cart");
+    localStorage.removeItem("wishlist");
+    router.push("/");
+    setUser(false);
+    setUserData({});
+  };
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await getLocalFetch().get("/api/user");
+      setUserData(res.data);
+    };
+    if (user) {
+      fetch();
+    }
+  }, [user]);
+
   const value = {
     user,
-    addUser,
+    userData,
     addToken,
+    logout,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

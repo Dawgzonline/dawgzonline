@@ -1,8 +1,8 @@
 import SetRoutes from "../../libs/SetRoutes";
-import sanityClient from "../../sanity/client";
+import sanityClient from "../../api/client";
 
 export default async function handler(req, res) {
-  SetRoutes(req, res, {
+  await SetRoutes(req, res, {
     getCallback: async (req, res) => {
       try {
         if (!req.query.query) {

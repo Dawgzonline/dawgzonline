@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { RestMethod } from "../../constant/constant";
-import sanityClient from "../../sanity/client";
+import sanityClient from "../../api/client";
 import bcrypt from "bcrypt";
-import decode from "jsonwebtoken/decode";
+import { decode } from "jsonwebtoken";
 
 const googleRegistration = async (token, req, res) => {
   const googleUser = decode(token);
@@ -21,7 +21,7 @@ const googleRegistration = async (token, req, res) => {
     username: googleUser.email,
     email: googleUser.email,
     auth_type: "google_oauth",
-    googleId : googleUser.sub,
+    googleId: googleUser.sub,
   };
   try {
     const response = await sanityClient.create(requestBody);

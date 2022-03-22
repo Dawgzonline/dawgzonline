@@ -65,7 +65,7 @@ export default function Navbar() {
         <PersonOutlineOutlinedIcon
           className={styles.globalicons}
           onClick={() => {
-            history.push("/profile");
+            history.push("/account");
           }}
           sx={{ mx: 0.8 }}
         />
@@ -86,6 +86,9 @@ export default function Navbar() {
             zIndex: "10",
             backgroundColor: "secondary.light",
             transform: "translateY(15%)",
+          }}
+          onClick={() => {
+            history.push("/");
           }}
         >
           <Image alt="" src="/logo.png" width="86" height="86" />

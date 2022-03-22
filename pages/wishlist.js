@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Wishlist from "../components/Wishlist";
-import sanityClient from "../sanity/client"
+import sanityClient from "../api/client"
 
 export default function wishlist({categories}) {
   return (

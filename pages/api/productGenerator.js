@@ -1,6 +1,6 @@
 import getCsvDataFromUrl from "../../libs/csv";
 import SetRoutes from "../../libs/SetRoutes";
-import sanityClient from "../../sanity/client";
+import sanityClient from "../../api/client";
 import { v4 as uuidv4 } from "uuid";
 
 const formatToProductData = (data) => {

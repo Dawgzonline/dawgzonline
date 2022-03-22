@@ -2,7 +2,7 @@ import Head from "next/head";
 import Footer from "../components/Footer";
 import MainPage from "../components/MainPage";
 import Navbar from "../components/Navbar";
-import sanityClient from "../sanity/client";
+import sanityClient from "../api/client";
 
 export default function Home({banner}) {
   return (

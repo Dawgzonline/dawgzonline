@@ -1,0 +1,8 @@
+import razorpay from "razorpay";
+
+const Razorpay = new razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET,
+});
+
+export default Razorpay; 

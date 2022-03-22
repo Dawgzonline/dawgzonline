@@ -6,7 +6,9 @@
 .signup_inner_container {
   background-color: var(--background-color);
   padding: 0rem 3rem 2rem 3rem;
-  min-height: calc( 100vh - 5rem);
+  min-height: calc(100vh - 5rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .signup_inner_container > h1 {

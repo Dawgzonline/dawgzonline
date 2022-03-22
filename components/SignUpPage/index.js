@@ -88,7 +88,12 @@ export default function SignUpPage() {
             </Alert>
           )}
         </Box>
-        <form noValidate onSubmit={handleSubmission}>
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmission}
+          sx={{ display: "flex", flexDirection: "column", flexGrow : 1 }}
+        >
           <Typography variant="body1" color="myprimary.dark">
             First Name
           </Typography>
@@ -218,7 +223,7 @@ export default function SignUpPage() {
               setError(msg);
             }}
           />
-          <Box component="ul">
+          <Box component="ul" sx={{ mt: "auto" }}>
             <Typography
               variant="body2"
               variantMapping={{ body2: "li" }}
@@ -241,7 +246,7 @@ export default function SignUpPage() {
               Existing User ? Login
             </Typography>
           </Box>
-        </form>
+        </Box>
         {/* <button>
           <GoogleIcon />{" "}
           <Typography variant="body1" color="myprimary.dark">

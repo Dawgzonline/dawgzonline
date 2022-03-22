@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -19,6 +19,7 @@ import Input from "../styled/Input";
 import useWishlist from "../../hooks/useWishlist";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { AuthContext } from "../../context/AuthProvider";
 
 const InputNumberBox = ({ quantity, addVariant, removeVariant, sx }) => {
   return (
@@ -327,6 +328,14 @@ function Cart() {
   const coupanSaving = 0;
   const total = totalCost - totalSaving - coupanSaving;
   const router = useRouter();
+  const { userData } = useContext(AuthContext);
+  const handleOrder = () => {
+    if (!userData._id) {
+      router.push("/login");
+      return;
+    }
+    router.push("/checkout");
+  };
   return (
     <Box sx={{ minHeight: "var(--window-height)" }}>
       {!loading && cartItem.length === 0 && (
@@ -449,7 +458,7 @@ function Cart() {
             </Grid>
           </Box>
           <Box sx={{ p: 2, py: 4, display: "flex", justifyContent: "center" }}>
-            <StyledButton text={"Confirm Order"} />
+            <StyledButton text={"Confirm Order"} onClick={handleOrder} />
           </Box>
         </>
       )}

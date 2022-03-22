@@ -9,7 +9,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import Button from "./styled/Button";
 
 export default function GoogleBtn({ action, setError }) {
-  const { addToken, addUser } = useContext(AuthContext);
+  const { addToken } = useContext(AuthContext);
   const router = useRouter();
 
   const postVendorRegister = async (token) => {
@@ -28,7 +28,6 @@ export default function GoogleBtn({ action, setError }) {
     try {
       const clientFetch = getFetch();
       const res = await clientFetch.post(`/api/login?googleToken=${token}`);
-      addUser({ id: res.data._id });
       addToken(res.data.token);
       router.push("/");
     } catch (e) {
