@@ -31,7 +31,7 @@ const OrderCard = ({ order }) => {
       <Card sx={{ p: 2, borderRadius: 4 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
           <Typography variant="subtitle2" color="primary.main">
-            Order ID : {_id}
+            Order ID : {razorpay_id}
           </Typography>
           <Typography
             variant="body2"
