@@ -7,33 +7,41 @@ import getFetch from "../libs/fetch";
 import { IconButton } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import Button from "./styled/Button";
+import { UtilityContext } from "../context/UtilityProvider";
 
 export default function GoogleBtn({ action, setError }) {
   const { addToken } = useContext(AuthContext);
   const router = useRouter();
+  const {openLoading, closeLoading} = useContext(UtilityContext)
 
   const postVendorRegister = async (token) => {
     try {
+      openLoading();
       const clientFetch = getFetch();
       const res = await clientFetch.post(`/api/signup?googleToken=${token}`);
       router.push("/login");
       console.log(res);
+      closeLoading();
     } catch (e) {
       console.log(e);
       console.log(e?.response);
       setError(e?.response?.data?.message);
+      closeLoading();
     }
   };
   const postVendorLogin = async (token) => {
     try {
+      openLoading();
       const clientFetch = getFetch();
       const res = await clientFetch.post(`/api/login?googleToken=${token}`);
       addToken(res.data.token);
       router.push("/");
+      closeLoading();
     } catch (e) {
       console.log(e);
       console.log(e?.response);
       setError(e?.response?.data?.message);
+      closeLoading();
     }
   };
   const handleSuccess = (response) => {

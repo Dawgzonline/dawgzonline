@@ -25,10 +25,8 @@ export default function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    localStorage.removeItem(profile);
-    localStorage.removeItem("cart");
-    localStorage.removeItem("wishlist");
     router.push("/");
+    localStorage.removeItem(profile);
     setUser(false);
     setUserData({});
   };
@@ -43,11 +41,17 @@ export default function AuthProvider({ children }) {
     }
   }, [user]);
 
+  const reload = async () => {
+    const res = await getLocalFetch().get("/api/user");
+    setUserData(res.data);
+  };
+
   const value = {
     user,
     userData,
     addToken,
     logout,
+    reload,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

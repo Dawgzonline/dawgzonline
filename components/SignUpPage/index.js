@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -10,6 +10,8 @@ import Button from "../styled/Button";
 import { useRouter } from "next/router";
 import { authentication } from "../../constant/constant";
 import GoogleBtn from "../GoogleBtn";
+import Image from "next/image";
+import { UtilityContext } from "../../context/UtilityProvider";
 
 export default function SignUpPage() {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -55,7 +57,7 @@ export default function SignUpPage() {
 
   const router = useRouter();
 
-  const { handleSubmission } = useForm({
+  const { handleSubmission, loading } = useForm({
     contentType: formContentType.urlencoded,
     postTo: "/api/signup",
     validate: (data) => {
@@ -63,16 +65,27 @@ export default function SignUpPage() {
       return isValid ? { error: false } : { error: true };
     },
     afterSubmission: (res) => {
-      router.push("/");
+      router.push("/login");
       console.log(res);
     },
     error: (msg) => {
       setError(msg);
     },
   });
+  const { openLoading, closeLoading } = useContext(UtilityContext);
+  useEffect(() => {
+    if (loading) {
+      openLoading();
+      return;
+    }
+    closeLoading();
+  }, [loading, openLoading, closeLoading]);
 
   return (
     <div className={styles.signup_container}>
+      <Box sx={{ mb: 2, display: "flex", justifyContent: "center" }}>
+        <Image alt="" src="/logo.png" width="200" height="200" />
+      </Box>
       <div className={styles.signup_inner_container}>
         <Typography
           variant="h4"
@@ -92,7 +105,7 @@ export default function SignUpPage() {
           component="form"
           noValidate
           onSubmit={handleSubmission}
-          sx={{ display: "flex", flexDirection: "column", flexGrow : 1 }}
+          sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
         >
           <Typography variant="body1" color="myprimary.dark">
             First Name
@@ -216,7 +229,7 @@ export default function SignUpPage() {
               CREATE ACCOUNT
             </Typography>
           </button> */}
-          <Button text="CREATE ACCOUNT" type="submit" />
+          <Button text="CREATE ACCOUNT" type="submit" disabled={loading} />
           <GoogleBtn
             action={authentication.signup}
             setError={(msg) => {

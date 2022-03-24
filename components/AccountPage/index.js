@@ -20,10 +20,12 @@ const OrderCard = ({ order }) => {
     trackingNumber = "8829282772992",
     amount,
     status,
+    razorpay_id
   } = order;
   const quantity = order.items.reduce((prev, current) => {
     return prev + current.amount;
   }, 0);
+  const router = useRouter();
   return (
     <Grid item xs={12}>
       <Card sx={{ p: 2, borderRadius: 4 }}>
@@ -79,7 +81,14 @@ const OrderCard = ({ order }) => {
             mt: 2,
           }}
         >
-          <Button variant="outlined" sx={{ borderRadius: 2 }} size="small">
+          <Button
+            variant="outlined"
+            sx={{ borderRadius: 2 }}
+            size="small"
+            onClick={() => {
+              router.push(`/order/${razorpay_id}`);
+            }}
+          >
             Details
           </Button>
           <Typography variant="subtitle2" color="primary.main">

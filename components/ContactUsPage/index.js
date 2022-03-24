@@ -15,7 +15,7 @@ export default function ContactUsPage() {
       title: "Contact Number",
       content: ["+91 9930 924 028   +91 9930 824 029"],
       width : {
-        width : "7rem"
+        width : "8rem"
       },
     },
     {

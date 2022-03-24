@@ -14,4 +14,9 @@
   & > svg {
     font-size: 1rem;
   }
+
+  &:disabled {
+    color: white;
+    opacity: 0.8;
+  }
 }

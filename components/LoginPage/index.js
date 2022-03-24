@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { Box, Alert, Typography, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../../context/AuthProvider";
 import GoogleBtn from "../GoogleBtn";
 import { authentication } from "../../constant/constant";
+import { UtilityContext } from "../../context/UtilityProvider";
 
 export default function LoginPage() {
   const { addToken } = useContext(AuthContext);
@@ -32,7 +33,7 @@ export default function LoginPage() {
     return true;
   };
 
-  const { handleSubmission } = useForm({
+  const { handleSubmission, loading } = useForm({
     contentType: formContentType.urlencoded,
     postTo: "/api/login",
     validate: (data) => {
@@ -48,7 +49,14 @@ export default function LoginPage() {
       setError(msg);
     },
   });
-
+  const { openLoading, closeLoading } = useContext(UtilityContext);
+  useEffect(() => {
+    if (loading) {
+      openLoading();
+      return;
+    }
+    closeLoading();
+  }, [loading, openLoading, closeLoading]);
   return (
     <div className={styles.login_container}>
       <div className={styles.image_container}>
@@ -112,6 +120,7 @@ export default function LoginPage() {
               borderRadius: "1.2rem",
               marginBottom: "1rem",
             }}
+            disabled={loading}
           />
           <ul>
             <Typography

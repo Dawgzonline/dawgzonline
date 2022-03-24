@@ -6,20 +6,29 @@ import useForm from "../../hooks/useForm";
 import { formContentType } from "../../constant/constant";
 import { Box, Typography } from "@mui/material";
 import { AuthContext } from "../../context/AuthProvider";
+import { UtilityContext } from "../../context/UtilityProvider";
+import Close from "@mui/icons-material/Close";
 
-const ProfileInput = ({ title, content, inputName, show = true }) => {
+const ProfileInput = ({
+  title,
+  content,
+  inputName,
+  show = true,
+  value,
+  setValue,
+  type = "text",
+}) => {
   const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
   const inputClick = () => {
-    if (!open) {
-      setOpen(true);
-      return;
-    }
-    if (inputValue === "") {
+    setOpen(!open);
+  };
+
+  useEffect(() => {
+    if (value === "" || value === content) {
       setOpen(false);
     }
-  };
+  }, [value, content]);
 
   return (
     <div
@@ -45,17 +54,32 @@ const ProfileInput = ({ title, content, inputName, show = true }) => {
           )}
         </div>
       )}
-      {open && (
+      {open && type !== "textarea" && (
         <input
-          value={inputValue}
+          value={value}
           name={inputName}
           placeholder="Enter text here"
+          type={type}
           onChange={(e) => {
-            setInputValue(e.target.value);
+            setValue(e.target.value);
           }}
         />
       )}
-      <EditIcon className={styles.global_icons} onClick={inputClick} />
+      {open && type == "textarea" && (
+        <textarea
+          value={value}
+          name={inputName}
+          placeholder="Enter text here"
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          rows={4}
+        />
+      )}
+      {!open && (
+        <EditIcon className={styles.global_icons} onClick={inputClick} />
+      )}
+      {open && <Close className={styles.global_icons} onClick={inputClick} />}
     </div>
   );
 };
@@ -81,6 +105,7 @@ export default function ProfilePage() {
     {
       title: "Password",
       inputName: "password",
+      type: "password",
       show: false,
     },
     {
@@ -90,14 +115,26 @@ export default function ProfilePage() {
     {
       title: "Delivery Address 1",
       inputName: "address_1",
+      type: "textarea",
     },
     {
       title: "Delivery Address 2",
       inputName: "address_2",
+      type: "textarea",
     },
   ]);
 
-  const { userData } = useContext(AuthContext);
+  const { userData, reload } = useContext(AuthContext);
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+    mobile: "",
+    address_1: "",
+    address_2: "",
+  });
   useEffect(() => {
     setProfileItem((profileItem) => [
       ...profileItem.map((item) => {
@@ -107,8 +144,23 @@ export default function ProfilePage() {
         return item;
       }),
     ]);
+    setData((data) => {
+      const customData = {};
+      for (let [key, value] of Object.entries(userData)) {
+        if (!value) {
+          continue;
+        }
+        customData[key] = value;
+      }
+      return {
+        ...data,
+        ...customData,
+      };
+    });
   }, [userData]);
-  const { handleSubmission } = useForm({
+  const { openLoading, closeLoading, openSnakebar } =
+    useContext(UtilityContext);
+  const { handleSubmission, loading } = useForm({
     postTo: "/api/user/",
     contentType: formContentType.urlencoded,
     validate: (data) => {
@@ -117,11 +169,31 @@ export default function ProfilePage() {
     },
     afterSubmission: (res) => {
       console.log(res);
+      setData({
+        firstName: "",
+        lastName: "",
+        username: "",
+        email: "",
+        password: "",
+        mobile: "",
+        address_1: "",
+        address_2: "",
+      });
+      openSnakebar(res.data.message);
+      reload();
     },
     error: (msg) => {
+      openSnakebar(msg);
       console.log(msg);
     },
   });
+  useEffect(() => {
+    if (loading) {
+      openLoading();
+      return;
+    }
+    closeLoading();
+  }, [loading, openLoading, closeLoading]);
   return (
     <Box component="form" noValidate onSubmit={handleSubmission}>
       <div className={styles.profile_container}>
@@ -140,6 +212,16 @@ export default function ProfilePage() {
               content={item.content}
               inputName={item.inputName}
               show={item.show}
+              type={item.type}
+              value={data[item.inputName]}
+              setValue={(newValue) => {
+                setData((data) => {
+                  return {
+                    ...data,
+                    [item.inputName]: newValue,
+                  };
+                });
+              }}
             />
           ))}
 

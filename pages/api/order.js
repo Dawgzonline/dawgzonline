@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     {
       postCallback: async (req, res) => {
         try {
-          if (!req.body.cart) {
+          if (!req.body) {
             res.status(409).json({ message: "Missing data" });
             return;
           }
@@ -83,6 +83,7 @@ export default async function handler(req, res) {
               _type: "reference",
               _ref: req.user.id,
             },
+            address : data.address,
           });
           const _key = uuidv4().slice(0, 12);
           requestBody.push({

@@ -393,7 +393,7 @@ function Cart() {
             >
               Apply Coupan
             </Typography>
-            <Input />
+            <Input placeholder="Coupen Code"/>
           </Box>
           <Box sx={{ p: 1, py: 2, backgroundColor: "secondary.main" }}>
             <Grid container>

@@ -14,7 +14,7 @@
 
 .profile_input {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin: 0.6rem 0rem;
 }
 
@@ -29,6 +29,7 @@
 
 .profile_input.profile_input_dim {
     border-bottom: 0.1rem solid var(--light-color);
+    margin: 1rem 0rem;
 }
 
 
@@ -39,8 +40,17 @@
 .profile_input > input {
     border: none;
     background-color: var(--background-color);
-    height: 1.5rem;
+    height: 2rem;
     flex-grow: 0.8;
+    padding: 0;
+    font-size: 1rem;
+}
+.profile_input > textarea {
+    border: none;
+    background-color: var(--background-color);
+    flex-grow: 0.8;
+    padding: 0.5rem;
+    font-size: 1rem;
 }
 
 :is(.profile_input > input:hover, .profile_input > input:focus){
@@ -48,7 +58,7 @@
 }
 
 .profile_input > input::-webkit-input-placeholder{
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     color: var(--light-color);
 }
 

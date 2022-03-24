@@ -1,6 +1,7 @@
 import { RestMethod } from "../../constant/constant";
 import { verify } from "jsonwebtoken";
 import sanityClient from "../../api/client";
+import bcrypt from "bcrypt";
 
 export default async function handler(req, res) {
   const { method, headers } = req;
@@ -30,7 +31,8 @@ export default async function handler(req, res) {
               _createdAt,
               amount,
               status,
-              items
+              items,
+              razorpay_id
             }
         } `);
         res.status(200).json({ ...data[0] });
@@ -54,19 +56,27 @@ export default async function handler(req, res) {
         headers.authorization.split(" ")[1],
         process.env.JWT_SECRET
       );
+      const data = {
+        ...userData,
+      };
+      if (data.mobile) {
+        data.mobile = parseInt(data.mobile);
+      }
+      if (data.password) {
+        const hashedPassword = await bcrypt.hash(userData.password, 10);
+        data.password = hashedPassword;
+      }
       const requestBody = [
         {
           patch: {
             id: user.id,
-            set: {
-              ...userData,
-            },
+            set: data,
           },
         },
       ];
       try {
         await sanityClient.mutate(requestBody);
-        res.status(201).json({ message: "User created successfully" });
+        res.status(200).json({ message: "Changed Successfully" });
       } catch (e) {
         console.log(e.response);
         res

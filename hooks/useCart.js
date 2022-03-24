@@ -44,7 +44,11 @@ function useCart() {
   const deleteFromCart = (data) => {
     modifyCart([...cart.filter((obj) => !isObjectEqual(data, obj))]);
   };
-  return { cart, addToCart, deleteFromCart, removeFromCart };
+
+  const empty = () => {
+    modifyCart([]);
+  }
+  return { cart, addToCart, deleteFromCart, removeFromCart, empty };
 }
 
 export default useCart;

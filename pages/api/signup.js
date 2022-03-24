@@ -22,6 +22,7 @@ const googleRegistration = async (token, req, res) => {
     email: googleUser.email,
     auth_type: "google_oauth",
     googleId: googleUser.sub,
+    orders : [],
   };
   try {
     const response = await sanityClient.create(requestBody);
@@ -69,6 +70,7 @@ export default async function handler(req, res) {
         email: userData.email,
         password: hashedPassword,
         auth_type: "custom_auth",
+        orders : [],
       };
       try {
         const response = await sanityClient.create(requestBody);
